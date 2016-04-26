@@ -11,7 +11,7 @@ title: Linear regression
 <p>Linear regression is a simple model oftenly used to predict the value of a CONTINUOUS variable interesting to us. Given a set of data, if there is a inherent structure of them, we may use the "regression" method to degenerate into a line (straight, curve, or more complicated shape, depends on the model you built which should balance between under-fitting and over-fitting). </p>
 <p>MODEL</p>
 
-<p>&&y = \sum_{i=0}^n \theta_i * x_i</p>
+<p>&&y = \sum_{i=0}^n \theta_i \times x_i&&</p>
 
 <p>Model interpretion: </p>
 <p>Model interpretion: </p>
