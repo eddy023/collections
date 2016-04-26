@@ -17,5 +17,5 @@ title: Linear regression
 <p>$$J(\theta) = 1/2 \times \sum_{j=0}^m (\sum_{i=0}^n \theta_i \times x_i^{(j)} - y_j)^2 $$</p>
 <p>The cost function which represents how y is fit into x; minimizing the cost to learn the parameter value. This is a convex optimization problem for quadratic function. We can use gradient descent or Newton's method to solve it. Suppose we use gradient descent, then we need to perform below iteration until convergence:</p>
 <p>$$\theta = \theta - \alpha \times \nabla_\theta J(\theta) = \theta - \alpha \times \sum_{j=0}^m (\sum_{i=0}^n \theta_i \times x_i^{(j)} - y_j) \cdot x $$</p>
-
+<p></p>
 
