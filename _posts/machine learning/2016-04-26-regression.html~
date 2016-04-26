@@ -12,7 +12,7 @@ title: Linear regression
 <p>--MODEL--</p>
 <p>$$ y = \sum_{i=0}^n \theta_i \times x_i $$</p>
 <p>The above model assumes $$y$$ is a linear combination of $$x$$. If the model fail to fit the data well, you may consider introduce higher order variable which might be like:</p>
-<p>$$ y = \sum_{i=0}^n \theta_i \times x_i + \theta_i' \time x_i^2 ... $$</p>
+<p>$$ y = \sum_{i=0}^n \theta_i \times x_i + \theta_i' \times x_i^2 ... $$</p>
 
 <p>Model interpretion: </p>
 <p>Model interpretion: </p>
