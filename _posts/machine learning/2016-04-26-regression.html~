@@ -10,12 +10,12 @@ title: Linear regression
 <p>--BACKGROUND--</p>
 <p>Linear regression is a simple model oftenly used to predict the value of a CONTINUOUS variable interesting to us. Given a set of data, if there is a inherent structure of them, we may use the "regression" method to degenerate into a line (straight, curve, or more complicated shape, depends on the model you built which should balance between under-fitting and over-fitting). </p>
 <p>--MODEL--</p>
-<p>$$ y = \sum_{i=0}^n \theta_i \times x_i $$</p>
+<p><m>$$ y = \sum_{i=0}^n \theta_i \times x_i $$</m></p>
 <p>The above model (hypothesis) assumes y is a linear combination of x. If the model fail to fit the data well, you may consider introduce higher order variable which might be like:</p>
 <p>$$ y = \sum_{i=0}^n \theta_i \times x_i + \theta_i' \times x_i^2 + ... $$</p>
 <p>--COST FUNCTION--</p>
 <p>$$J(\theta) = 1/2 \times \sum_{j=0}^m (\sum_{i=0}^n \theta_i \times x_i^{(j)} - y_j)^2 $$</p>
 <p>The cost function which represents how y is fit into x; minimizing the cost to learn the parameter value. This is a convex optimization problem for quadratic function. We can use gradient descent or Newton's method to solve it. Suppose we use gradient descent, then we need to perform below iteration until convergence:</p>
 <p>$$\theta = \theta - \alpha \times \nabla_\theta J(\theta) = \theta - \alpha \times \sum_{j=0}^m (\sum_{i=0}^n \theta_i \times x_i^{(j)} - y_j) \cdot x $$</p>
-<p></p>
+<p>--EXERCISE--</p>
 
