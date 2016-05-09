@@ -22,116 +22,116 @@ title: Linear regression
 <p>
 //---------------------------------------------------------------------------------
 </p>
-<p>import numpy as np
-<p>import scipy.optimize as opt
-<p>import math
-<p>import matplotlib.pyplot as plt
-<p>from random import *
+<p>import numpy as np</p>
+<p>import scipy.optimize as opt</p>
+<p>import math</p>
+<p>import matplotlib.pyplot as plt</p>
+<p>from random import *</p>
     
-<p># read data
-<p>f_data = np.loadtxt("housing.data")
-<p>data = [[1] for _ in range(len(f_data))]
-<p>for i,line in enumerate(f_data):
-<p>    data[i].extend(line)
+<p># read data</p>
+<p>f_data = np.loadtxt("housing.data")</p>
+<p>data = [[1] for _ in range(len(f_data))]</p>
+<p>for i,line in enumerate(f_data):</p>
+<p>    data[i].extend(line)</p>
 
-<p># transform data into matrix to ease computation
-<p>data = np.matrix(data)
-<p># seperate data into "train" and "test" group 
-<p>train_x = data[0:400,0:-1]
-<p>train_y = data[0:400,-1]
-<p>test_x = data[400:len(data),0:-1]
-<p>test_y = data[400:len(data),-1]
+<p># transform data into matrix to ease computation</p>
+<p>data = np.matrix(data)</p>
+<p># seperate data into "train" and "test" group</p>
+<p>train_x = data[0:400,0:-1]</p>
+<p>train_y = data[0:400,-1]</p>
+<p>test_x = data[400:len(data),0:-1]</p>
+<p>test_y = data[400:len(data),-1]</p>
 
-<p># give it a guess for the value of theta
-<p># theta is the model parameter we intend to learn
-<p>m,n = train_x.shape
-<p>theta = np.matrix([random() for _ in range(n)])
+<p># give it a guess for the value of theta</p>
+<p># theta is the model parameter we intend to learn</p>
+<p>m,n = train_x.shape</p>
+<p>theta = np.matrix([random() for _ in range(n)])</p>
 
-<p># calcuate the difference between model calculated value and given y
-<p>def dif(theta, x, y):
-<p>    return x * np.transpose(theta) - y
+<p># calcuate the difference between model calculated value and given y</p>
+<p>def dif(theta, x, y):</p>
+<p>    return x * np.transpose(theta) - y</p>
 
-<p># 'dis' actually is the cost function
-<p>def dis(theta, x, y):
-<p>    df = dif(theta, x, y)
-<p>    return (np.transpose(df) * df)[0,0]
+<p># 'dis' actually is the cost function</p>
+<p>def dis(theta, x, y):</p>
+<p>    df = dif(theta, x, y)</p>
+<p>    return (np.transpose(df) * df)[0,0]</p>
 
-<p># calcuate the gradient
-<p>def calcGrad(theta, x, y):
-<p>    return np.transpose(dif(theta, x, y)) * x
+<p># calcuate the gradient</p>
+<p>def calcGrad(theta, x, y):</p>
+<p>    return np.transpose(dif(theta, x, y)) * x</p>
 
-<p># calcuate the gradient in a norm form
-<p>def normGrad(theta, x, y):
-<p>    g = calcGrad(theta, x, y)
-<p>    mo = math.sqrt(g * np.transpose(g))
-<p>    return g/mo
+<p># calcuate the gradient in a norm form</p>
+<p>def normGrad(theta, x, y):</p>
+<p>    g = calcGrad(theta, x, y)</p>
+<p>    mo = math.sqrt(g * np.transpose(g))</p>
+<p>    return g/mo</p>
 
-<p># check whether a gradient is correctly calculated
-<p>def gradientChecking(theta, x, y, i, epsilon):
-<p>    m,n = theta.shape
-<p>    e = np.zeros(n)
-<p>    e[i] = epsilon
-<p>    e = np.matrix(e)
-<p>    proxg = (dis(theta+e, x, y) - dis(theta-e, x, y))/2/epsilon/2
-<p>    gg = calcGrad(theta, x, y)
-<p>    print('estimate-calculated:',proxg,'-',gg[0,i],'=',proxg-gg[0,i])
+<p># check whether a gradient is correctly calculated</p>
+<p>def gradientChecking(theta, x, y, i, epsilon):</p>
+<p>    m,n = theta.shape</p>
+<p>    e = np.zeros(n)</p>
+<p>    e[i] = epsilon</p>
+<p>    e = np.matrix(e)</p>
+<p>    proxg = (dis(theta+e, x, y) - dis(theta-e, x, y))/2/epsilon/2</p>
+<p>    gg = calcGrad(theta, x, y)</p>
+<p>    print('estimate-calculated:',proxg,'-',gg[0,i],'=',proxg-gg[0,i])</p>
 
-<p># to find a suitable alpha to iteratively calc theta
-<p>def alphaSearch(alpha, theta, x, y):
-<p>    alpha = np.float64(alpha)
-<p>    new_theta = theta - alpha * calcGrad(theta, x, y)
-<p>    while(dis(new_theta,x,y) > dis(theta,x,y)):
-<p>        alpha = alpha / 2;
-<p>        new_theta = theta - alpha * calcGrad(theta, x, y)
-<p>    return alpha
+<p># to find a suitable alpha to iteratively calc theta</p>
+<p>def alphaSearch(alpha, theta, x, y):</p>
+<p>    alpha = np.float64(alpha)</p>
+<p>    new_theta = theta - alpha * calcGrad(theta, x, y)</p>
+<p>    while(dis(new_theta,x,y) > dis(theta,x,y)):</p>
+<p>        alpha = alpha / 2;</p>
+<p>        new_theta = theta - alpha * calcGrad(theta, x, y)</p>
+<p>    return alpha</p>
 
-<p># the optmize function, iteratively approaching the optimal value
-<p>def learnTheta(error, alpha, theta, x, y):
-<p>    cnt = 0
-<p>    while error > 0.0001 and cnt < 1000000:
-<p>        #alpha = 0.01
-<p>        alpha = alphaSearch(alpha, theta, x, y)
-<p>        new_theta = theta - alpha * calcGrad(theta, x, y)
-<p>        error = abs(dis(new_theta,x,y) - dis(theta,x,y))
-<p>        cnt += 1
-<p>        theta = new_theta            
-<p>    #gradientChecking(theta, x, y, 0, 0.0001)
-<p>    return theta, error, cnt, alpha
+<p># the optmize function, iteratively approaching the optimal value</p>
+<p>def learnTheta(error, alpha, theta, x, y):</p>
+<p>    cnt = 0</p>
+<p>    while error > 0.0001 and cnt < 1000000:</p>
+<p>        #alpha = 0.01</p>
+<p>        alpha = alphaSearch(alpha, theta, x, y)</p>
+<p>        new_theta = theta - alpha * calcGrad(theta, x, y)</p>
+<p>        error = abs(dis(new_theta,x,y) - dis(theta,x,y))</p>
+<p>        cnt += 1</p>
+<p>        theta = new_theta            </p>
+<p>    #gradientChecking(theta, x, y, 0, 0.0001)</p>
+<p>    return theta, error, cnt, alpha</p>
 
-<p># draw a simple picture
-<p>def drawPic(theta, x, y):
-<p>    dpy = np.sort([i for i in np.asarray(x * np.transpose(theta))[:,0]])
-<p>    dy =[i for i in np.asarray(y)[:,0]]
-<p>    #print(np.sort(dpy))
-<p>    fig, ax = plt.subplots()
-<p>    ax.plot([i for i in range(len(dpy))], dpy, 'x')
-<p>    fig.autofmt_xdate()
-<p>    plt.show()
+<p># draw a simple picture</p>
+<p>def drawPic(theta, x, y):</p>
+<p>    dpy = np.sort([i for i in np.asarray(x * np.transpose(theta))[:,0]])</p>
+<p>    dy =[i for i in np.asarray(y)[:,0]]</p>
+<p>    #print(np.sort(dpy))</p>
+<p>    fig, ax = plt.subplots()</p>
+<p>    ax.plot([i for i in range(len(dpy))], dpy, 'x')</p>
+<p>    fig.autofmt_xdate()</p>
+<p>    plt.show()</p>
 
-<p># calcuate the covariance of the vectors of input x
-<p># if vectors of x are not inheretly correlated, the linear model is not a good option 
-<p># (even higher order model may under-fit the data) 
-<p>def covarianceOfMatrix(x):
-<p>    m,n = x.shape
-<p>    cov = []
-<p>    for i in range(m):
-<p>        tmp = []
-<p>        for j in range(m):
-<p>            tmp.append(int(((x[i,:] * np.transpose(x[j,:]))[0,0])))
-<p>        cov.append(tmp)
-<p>    print(cov)
+<p># calcuate the covariance of the vectors of input x</p>
+<p># if vectors of x are not inheretly correlated, the linear model is not a good option </p>
+<p># (even higher order model may under-fit the data) </p>
+<p>def covarianceOfMatrix(x):</p>
+<p>    m,n = x.shape</p>
+<p>    cov = []</p>
+<p>    for i in range(m):</p>
+<p>        tmp = []</p>
+<p>        for j in range(m):</p>
+<p>            tmp.append(int(((x[i,:] * np.transpose(x[j,:]))[0,0])))</p>
+<p>        cov.append(tmp)</p>
+<p>    print(cov)</p>
 
-<p># define a costFunc to use libray opt function of scipy
-<p>def costFunc(theta):
-<p>    ta = np.transpose(np.matrix(theta))
-<p>    df = train_x * ta - train_y
-<p>    return (np.transpose(df) * df)[0,0]
+<p># define a costFunc to use libray opt function of scipy</p>
+<p>def costFunc(theta):</p>
+<p>    ta = np.transpose(np.matrix(theta))</p>
+<p>    df = train_x * ta - train_y</p>
+<p>    return (np.transpose(df) * df)[0,0]</p>
 
-<p>#gradientChecking(theta, train_x, train_y, 0, 0.001)
-<p>theta, error, cnt, alpha = learnTheta(0.1, 0.01, theta, train_x, train_y)
-<p>#drawPic(theta, test_x, test_y)
-<p>#covarianceOfMatrix(train_x[0:50,:])
-<p>#ta = theta
+<p>#gradientChecking(theta, train_x, train_y, 0, 0.001)</p>
+<p>theta, error, cnt, alpha = learnTheta(0.1, 0.01, theta, train_x, train_y)</p>
+<p>#drawPic(theta, test_x, test_y)</p>
+<p>#covarianceOfMatrix(train_x[0:50,:])</p>
+<p>#ta = theta</p>
 <p>#print(opt.fmin(costFunc, ta))</p>
 <p>
 //---------------------------------------------------------------------------------
