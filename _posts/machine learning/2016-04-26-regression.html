@@ -11,11 +11,141 @@ title: Linear regression
 <p>Linear regression is a simple model oftenly used to predict the value of a CONTINUOUS variable interesting to us. Given a set of data, if there is a inherent structure of them, we may use the "regression" method to degenerate the "sparse data" into a line (straight, curve, or more complicated shape, depends on the model you built which should balance between under-fitting and over-fitting). </p>
 <p>--MODEL--</p>
 <p><m>$$ y = \sum_{i=0}^n \theta_i \times x_i $$</m></p>
-<p>The above model (hypothesis) assumes <m>$$y$$</m> is a linear combination of x. If the model fail to fit the data well, you may consider introduce higher order variable(s) which might be like:</p>
+<p>The above model (hypothesis) assumes y is a linear combination of x. If the model fail to fit the data well, you may consider introduce higher order variable(s) which might be like:</p>
 <p>$$ y = \sum_{i=0}^n \theta_i \times x_i + \theta_i' \times x_i^2 + ... $$</p>
 <p>--COST FUNCTION--</p>
 <p>$$J(\theta) = 1/2 \times \sum_{j=0}^m (\sum_{i=0}^n \theta_i \times x_i^{(j)} - y_j)^2 $$</p>
 <p>The cost function which represents how y is fit into x; minimizing the cost to learn the parameter value. This is a convex optimization problem for quadratic function. We can use gradient descent or Newton's method to solve it. Suppose we use gradient descent, then we need to perform below iteration until convergence:</p>
 <p>$$\theta = \theta - \alpha \times \nabla_\theta J(\theta) = \theta - \alpha \times \sum_{j=0}^m (\sum_{i=0}^n \theta_i \times x_i^{(j)} - y_j) \cdot x $$</p>
-<p>--EXERCISE--</p>
+<p>--EXAMPLE--</p>
+<p>We use the exercise of stanford's deep learning course on linear regression as example to illustrate how it works. The exercise is originally implemented using matlab, but here we use python.</p>
+<p>
+//---------------------------------------------------------------------------------
+import numpy as np
+import scipy.optimize as opt
+import math
+import matplotlib.pyplot as plt
+from random import *
+    
+# read data
+f_data = np.loadtxt("housing.data")
+data = [[1] for _ in range(len(f_data))]
+for i,line in enumerate(f_data):
+    data[i].extend(line)
+
+# transform data into matrix to ease computation
+data = np.matrix(data)
+# seperate data into "train" and "test" group 
+train_x = data[0:400,0:-1]
+train_y = data[0:400,-1]
+test_x = data[400:len(data),0:-1]
+test_y = data[400:len(data),-1]
+
+# give it a guess for the value of theta
+# theta is the model parameter we intend to learn
+m,n = train_x.shape
+theta = np.matrix([random() for _ in range(n)])
+
+# calcuate the difference between model calculated value and given y
+def dif(theta, x, y):
+    return x * np.transpose(theta) - y
+
+# 'dis' actually is the cost function
+def dis(theta, x, y):
+    df = dif(theta, x, y)
+    return (np.transpose(df) * df)[0,0]
+
+# calcuate the gradient
+def calcGrad(theta, x, y):
+    return np.transpose(dif(theta, x, y)) * x
+
+# calcuate the gradient in a norm form
+def normGrad(theta, x, y):
+    g = calcGrad(theta, x, y)
+    mo = math.sqrt(g * np.transpose(g))
+    return g/mo
+
+# check whether a gradient is correctly calculated
+def gradientChecking(theta, x, y, i, epsilon):
+    m,n = theta.shape
+    e = np.zeros(n)
+    e[i] = epsilon
+    e = np.matrix(e)
+    proxg = (dis(theta+e, x, y) - dis(theta-e, x, y))/2/epsilon/2
+    gg = calcGrad(theta, x, y)
+    print('estimate-calculated:',proxg,'-',gg[0,i],'=',proxg-gg[0,i])
+
+# to find a suitable alpha to iteratively calc theta
+def alphaSearch(alpha, theta, x, y):
+    alpha = np.float64(alpha)
+    new_theta = theta - alpha * calcGrad(theta, x, y)
+    while(dis(new_theta,x,y) > dis(theta,x,y)):
+        alpha = alpha / 2;
+        new_theta = theta - alpha * calcGrad(theta, x, y)
+    return alpha
+
+# the optmize function, iteratively approaching the optimal value
+def learnTheta(error, alpha, theta, x, y):
+    cnt = 0
+    while error > 0.0001 and cnt < 1000000:
+        #alpha = 0.01
+        alpha = alphaSearch(alpha, theta, x, y)
+        new_theta = theta - alpha * calcGrad(theta, x, y)
+        error = abs(dis(new_theta,x,y) - dis(theta,x,y))
+        cnt += 1
+        theta = new_theta            
+    #gradientChecking(theta, x, y, 0, 0.0001)
+    return theta, error, cnt, alpha
+
+# draw a simple picture
+def drawPic(theta, x, y):
+    dpy = np.sort([i for i in np.asarray(x * np.transpose(theta))[:,0]])
+    dy =[i for i in np.asarray(y)[:,0]]
+    #print(np.sort(dpy))
+    fig, ax = plt.subplots()
+    ax.plot([i for i in range(len(dpy))], dpy, 'x')
+    fig.autofmt_xdate()
+    plt.show()
+
+# calcuate the covariance of the vectors of input x
+# if vectors of x are not inheretly correlated, the linear model is not a good option 
+# (even higher order model may under-fit the data) 
+def covarianceOfMatrix(x):
+    m,n = x.shape
+    cov = []
+    for i in range(m):
+        tmp = []
+        for j in range(m):
+            tmp.append(int(((x[i,:] * np.transpose(x[j,:]))[0,0])))
+        cov.append(tmp)
+    print(cov)
+
+# define a costFunc to use libray opt function of scipy
+def costFunc(theta):
+    ta = np.transpose(np.matrix(theta))
+    df = train_x * ta - train_y
+    return (np.transpose(df) * df)[0,0]
+
+#gradientChecking(theta, train_x, train_y, 0, 0.001)
+theta, error, cnt, alpha = learnTheta(0.1, 0.01, theta, train_x, train_y)
+#drawPic(theta, test_x, test_y)
+#covarianceOfMatrix(train_x[0:50,:])
+#ta = theta
+#print(opt.fmin(costFunc, ta))
+//---------------------------------------------------------------------------------
+</p>
+<p>We use alpha-search based gradient descent to calcuate the optimal value of theta. The value learned is:
+[[ 1.0384851  -0.19692624  0.05276306  0.02555604  1.19111883  0.29977401
+   5.38377582  0.00553718 -0.90970459  0.35873887 -0.01289489 -0.40098753
+   0.01832519 -0.52755291]]
+which corresponds to a cost value of 9525.90079742.
+</p>
+<p>We also use library function of scipy to find the optimal value which gives the result as:
+[[ 4.05255957 -0.32044996  0.06644376  0.0903571   0.85968213  0.18740047
+   4.67627849  0.01379926 -0.94136831  0.5444881  -0.0189391  -0.35893716
+   0.02228453 -0.60101315]]
+which corresponds to a cost value of 9899.99861211.
+</p>
+<p>We can see the learned thetas varies a bit and we get better result cause we apply more tight thershold.
+</p>
 
