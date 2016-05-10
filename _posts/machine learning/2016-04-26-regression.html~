@@ -2,152 +2,19 @@
 layout: default
 title: Linear regression
 ---
-<script type="text/javascript"
- src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <h2>{{ page.title }}</h2>
 <p>--BACKGROUND--</p>
-<p>Linear regression is a simple model oftenly used to predict the value of a CONTINUOUS variable interesting to us. Given a set of data, if there is a inherent structure of them, we may use the "regression" method to degenerate the "sparse data" into a line (straight, curve, or more complicated shape, depends on the model you built which should balance between under-fitting and over-fitting). </p>
+<p>Linear regression is oftenly used to find a linear model to predict the value of a CONTINUOUS variable (e.g., temperature, housing price, visitors, etc). Given a set of data, if there is an inherent structure of the set, we may use the "regression" method to try fitting a line into the "sparse data". The line could be straight, curve, or more complicated shape, depends on the model choosed which should seek balance between under-fitting and over-fitting. </p>
 <p>--MODEL--</p>
 <p><m>$$ y = \sum_{i=0}^n \theta_i \times x_i $$</m></p>
 <p>The above model (hypothesis) assumes y is a linear combination of x. If the model fail to fit the data well, you may consider introduce higher order variable(s) which might be like:</p>
 <p>$$ y = \sum_{i=0}^n \theta_i \times x_i + \theta_i' \times x_i^2 + ... $$</p>
+<p>In later posts, we'll discuss how to do model selection.</p>
 <p>--COST FUNCTION--</p>
 <p>$$J(\theta) = 1/2 \times \sum_{j=0}^m (\sum_{i=0}^n \theta_i \times x_i^{(j)} - y_j)^2 $$</p>
-<p>The cost function which represents how y is fit into x; minimizing the cost to learn the parameter value. This is a convex optimization problem for quadratic function. We can use gradient descent or Newton's method to solve it. Suppose we use gradient descent, then we need to perform below iteration until convergence:</p>
+<p>The cost function measures how y is fit into x. Minimizing the cost we would learn an optimal parameter value (set). The minimizing process is to solve a convex optimization problem for quadratic function. We can use gradient descent or Newton's method to solve it. We apply gradient descent here and we need to run below formula iteratively until convergence.</p>
 <p>$$\theta = \theta - \alpha \times \nabla_\theta J(\theta) = \theta - \alpha \times \sum_{j=0}^m (\sum_{i=0}^n \theta_i \times x_i^{(j)} - y_j) \cdot x $$</p>
 <p>--EXAMPLE--</p>
 <p>We use the exercise of stanford's deep learning course on linear regression as example to illustrate how it works. The exercise is originally implemented using matlab, but here we use python.</p>
-<p>
-//---------------------------------------------------------------------------------
-</p>
-<p>import numpy as np</p>
-<p>import scipy.optimize as opt</p>
-<p>import math</p>
-<p>import matplotlib.pyplot as plt</p>
-<p>from random import *</p>
-    
-<p># read data</p>
-<p>f_data = np.loadtxt("housing.data")</p>
-<p>data = [[1] for _ in range(len(f_data))]</p>
-<p>for i,line in enumerate(f_data):</p>
-<p>    data[i].extend(line)</p>
-
-<p># transform data into matrix to ease computation</p>
-<p>data = np.matrix(data)</p>
-<p># seperate data into "train" and "test" group</p>
-<p>train_x = data[0:400,0:-1]</p>
-<p>train_y = data[0:400,-1]</p>
-<p>test_x = data[400:len(data),0:-1]</p>
-<p>test_y = data[400:len(data),-1]</p>
-
-<p># give it a guess for the value of theta</p>
-<p># theta is the model parameter we intend to learn</p>
-<p>m,n = train_x.shape</p>
-<p>theta = np.matrix([random() for _ in range(n)])</p>
-
-<p># calcuate the difference between model calculated value and given y</p>
-<p>def dif(theta, x, y):</p>
-<p>    return x * np.transpose(theta) - y</p>
-
-<p># 'dis' actually is the cost function</p>
-<p>def dis(theta, x, y):</p>
-<p>    df = dif(theta, x, y)</p>
-<p>    return (np.transpose(df) * df)[0,0]</p>
-
-<p># calcuate the gradient</p>
-<p>def calcGrad(theta, x, y):</p>
-<p>    return np.transpose(dif(theta, x, y)) * x</p>
-
-<p># calcuate the gradient in a norm form</p>
-<p>def normGrad(theta, x, y):</p>
-<p>    g = calcGrad(theta, x, y)</p>
-<p>    mo = math.sqrt(g * np.transpose(g))</p>
-<p>    return g/mo</p>
-
-<p># check whether a gradient is correctly calculated</p>
-<p>def gradientChecking(theta, x, y, i, epsilon):</p>
-<p>    m,n = theta.shape</p>
-<p>    e = np.zeros(n)</p>
-<p>    e[i] = epsilon</p>
-<p>    e = np.matrix(e)</p>
-<p>    proxg = (dis(theta+e, x, y) - dis(theta-e, x, y))/2/epsilon/2</p>
-<p>    gg = calcGrad(theta, x, y)</p>
-<p>    print('estimate-calculated:',proxg,'-',gg[0,i],'=',proxg-gg[0,i])</p>
-
-<p># to find a suitable alpha to iteratively calc theta</p>
-<p>def alphaSearch(alpha, theta, x, y):</p>
-<p>    alpha = np.float64(alpha)</p>
-<p>    new_theta = theta - alpha * calcGrad(theta, x, y)</p>
-<p>    while(dis(new_theta,x,y) > dis(theta,x,y)):</p>
-<p>        alpha = alpha / 2;</p>
-<p>        new_theta = theta - alpha * calcGrad(theta, x, y)</p>
-<p>    return alpha</p>
-
-<p># the optmize function, iteratively approaching the optimal value</p>
-<p>def learnTheta(error, alpha, theta, x, y):</p>
-<p>    cnt = 0</p>
-<p>    while error > 0.0001 and cnt < 1000000:</p>
-<p>        #alpha = 0.01</p>
-<p>        alpha = alphaSearch(alpha, theta, x, y)</p>
-<p>        new_theta = theta - alpha * calcGrad(theta, x, y)</p>
-<p>        error = abs(dis(new_theta,x,y) - dis(theta,x,y))</p>
-<p>        cnt += 1</p>
-<p>        theta = new_theta            </p>
-<p>    #gradientChecking(theta, x, y, 0, 0.0001)</p>
-<p>    return theta, error, cnt, alpha</p>
-
-<p># draw a simple picture</p>
-<p>def drawPic(theta, x, y):</p>
-<p>    dpy = np.sort([i for i in np.asarray(x * np.transpose(theta))[:,0]])</p>
-<p>    dy =[i for i in np.asarray(y)[:,0]]</p>
-<p>    #print(np.sort(dpy))</p>
-<p>    fig, ax = plt.subplots()</p>
-<p>    ax.plot([i for i in range(len(dpy))], dpy, 'x')</p>
-<p>    fig.autofmt_xdate()</p>
-<p>    plt.show()</p>
-
-<p># calcuate the covariance of the vectors of input x</p>
-<p># if vectors of x are not inheretly correlated, the linear model is not a good option </p>
-<p># (even higher order model may under-fit the data) </p>
-<p>def covarianceOfMatrix(x):</p>
-<p>    m,n = x.shape</p>
-<p>    cov = []</p>
-<p>    for i in range(m):</p>
-<p>        tmp = []</p>
-<p>        for j in range(m):</p>
-<p>            tmp.append(int(((x[i,:] * np.transpose(x[j,:]))[0,0])))</p>
-<p>        cov.append(tmp)</p>
-<p>    print(cov)</p>
-
-<p># define a costFunc to use libray opt function of scipy</p>
-<p>def costFunc(theta):</p>
-<p>    ta = np.transpose(np.matrix(theta))</p>
-<p>    df = train_x * ta - train_y</p>
-<p>    return (np.transpose(df) * df)[0,0]</p>
-
-<p>#gradientChecking(theta, train_x, train_y, 0, 0.001)</p>
-<p>theta, error, cnt, alpha = learnTheta(0.1, 0.01, theta, train_x, train_y)</p>
-<p>#drawPic(theta, test_x, test_y)</p>
-<p>#covarianceOfMatrix(train_x[0:50,:])</p>
-<p>#ta = theta</p>
-<p>#print(opt.fmin(costFunc, ta))</p>
-<p>
-//---------------------------------------------------------------------------------
-</p>
-<p>We use alpha-search based gradient descent to calcuate the optimal value of theta. The value learned is:
-[[ 1.0384851  -0.19692624  0.05276306  0.02555604  1.19111883  0.29977401
-   5.38377582  0.00553718 -0.90970459  0.35873887 -0.01289489 -0.40098753
-   0.01832519 -0.52755291]]
-which corresponds to a cost value of 9525.90079742.
-</p>
-<p>We also use library function of scipy to find the optimal value which gives the result as:
-[[ 4.05255957 -0.32044996  0.06644376  0.0903571   0.85968213  0.18740047
-   4.67627849  0.01379926 -0.94136831  0.5444881  -0.0189391  -0.35893716
-   0.02228453 -0.60101315]]
-which corresponds to a cost value of 9899.99861211.
-</p>
-<p>We can see the learned thetas varies a bit and we get better result cause we apply more tight thershold.
-</p>
 

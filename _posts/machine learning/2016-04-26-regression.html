@@ -2,22 +2,19 @@
 layout: default
 title: Linear regression
 ---
-<script type="text/javascript"
- src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <h2>{{ page.title }}</h2>
 <p>--BACKGROUND--</p>
-<p>Linear regression is a simple model oftenly used to predict the value of a CONTINUOUS variable interesting to us. Given a set of data, if there is a inherent structure of them, we may use the "regression" method to degenerate the "sparse data" into a line (straight, curve, or more complicated shape, depends on the model you built which should balance between under-fitting and over-fitting). </p>
+<p>Linear regression is oftenly used to find a linear model to predict the value of a CONTINUOUS variable (e.g., temperature, housing price, visitors, etc). Given a set of data, if there is an inherent structure of the set, we may use the "regression" method to try fitting a line into the "sparse data". The line could be straight, curve, or more complicated shape, depends on the model choosed which should seek balance between under-fitting and over-fitting. </p>
 <p>--MODEL--</p>
 <p><m>$$ y = \sum_{i=0}^n \theta_i \times x_i $$</m></p>
 <p>The above model (hypothesis) assumes y is a linear combination of x. If the model fail to fit the data well, you may consider introduce higher order variable(s) which might be like:</p>
 <p>$$ y = \sum_{i=0}^n \theta_i \times x_i + \theta_i' \times x_i^2 + ... $$</p>
+<p>In later posts, we'll discuss how to do model selection.</p>
 <p>--COST FUNCTION--</p>
 <p>$$J(\theta) = 1/2 \times \sum_{j=0}^m (\sum_{i=0}^n \theta_i \times x_i^{(j)} - y_j)^2 $$</p>
-<p>The cost function which represents how y is fit into x; minimizing the cost to learn the parameter value. This is a convex optimization problem for quadratic function. We can use gradient descent or Newton's method to solve it. Suppose we use gradient descent, then we need to perform below iteration until convergence:</p>
+<p>The cost function measures how y is fit into x. Minimizing the cost we would learn an optimal parameter value (set). The minimizing process is to solve a convex optimization problem for quadratic function. We can use gradient descent or Newton's method to solve it. We apply gradient descent here and we need to run below formula iteratively until convergence.</p>
 <p>$$\theta = \theta - \alpha \times \nabla_\theta J(\theta) = \theta - \alpha \times \sum_{j=0}^m (\sum_{i=0}^n \theta_i \times x_i^{(j)} - y_j) \cdot x $$</p>
 <p>--EXAMPLE--</p>
 <p>We use the exercise of stanford's deep learning course on linear regression as example to illustrate how it works. The exercise is originally implemented using matlab, but here we use python.</p>
-
 
