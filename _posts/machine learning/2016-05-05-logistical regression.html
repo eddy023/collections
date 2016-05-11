@@ -1,11 +1,11 @@
 ---
 layout: default
-title: Linear regression
+title: logistical regression
 ---
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <h2>{{ page.title }}</h2>
 <p>--BACKGROUND--</p>
-<p>Linear regression is oftenly used to find a linear model to predict the value of a CONTINUOUS variable (e.g., temperature, housing price, visitors, etc). Given a set of data, if there is an inherent structure of the set, we may use the "regression" method to try fitting a line into the "sparse data". The line could be straight, curve, or more complicated shape, depends on the model choosed which should seek balance between under-fitting and over-fitting. </p>
+<p>Linear regression is used to learn a model to classify data into two groups. Actually, we apply a logistical or sigmoid function on the simple model of linear regression, which "squashes" y's domain from (-inf,inf) to (0,1). This came out of two reason: 1) we can interpret y in (0,1) as a probability to construct a cost functoin; 2) the logistical function is derivative in (-inf, inf). Actually, there is another important and more formal reason why apply logistical function we will discuss in a later post.</p>
 <p>--MODEL--</p>
 <p><m>$$ y = \sum_{i=0}^n \theta_i \times x_i $$</m></p>
 <p>The above model (hypothesis) assumes y is a linear combination of x. If the model fail to fit the data well, you may consider introduce higher order variable(s) which might be like:</p>
