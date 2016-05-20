@@ -3,7 +3,7 @@ layout: default
 title: Linear regression
 ---
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<h2>{{ page.title }}</h2>
+<h2>{{page.title}}</h2>
 <p>--BACKGROUND--</p>
 <p>Linear regression is oftenly used to find a linear model to predict the value of a CONTINUOUS variable (e.g., temperature, housing price, visitors, etc). Given a set of data, if there is an inherent structure of the set, we may use the "regression" method to try fitting a line into the "sparse data". The line could be straight, curve, or more complicated shape, depends on the model choosed which should seek balance between under-fitting and over-fitting. </p>
 <p>--MODEL--</p>
