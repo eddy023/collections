@@ -1,0 +1,39 @@
+topics
+basic model
+linear regression
+logistical regression
+svm
+pca
+baysian model
+markov process
+hidden markov model
+deep learning for image cognition
+neural machine translation
+recurrent neural network
+LSTM
+attention machanism
+(Recurrent Neural Networks are known to have problems dealing with long-range (e.g., 50 words) dependencies. In theory, architectures like LSTMs should be able to deal with this, but in practice long-range dependencies are still problematic;
+http://www.wildml.com/2016/01/attention-and-memory-in-deep-learning-and-nlp/)
+dynamic neural network
+end-to-end memory network
+
+--more
+k-mean
+reinforcement learning
+(materials: http://wanghaitao8118.blog.163.com/blog/static/13986977220153811210319/)
+tensorflow
+scrapy, scrapy-redis
+
+--state-of-arts tech & project
+
+--materials
+www.wildml.com
+csdn blog
+cs224d stanford
+cs229 stanford
+
+--Explanation on entropy of information theory
+http://colah.github.io/posts/2015-09-Visual-Information/
+
+--Explanation on the essence of backward propogation
+http://colah.github.io/posts/2015-08-Backprop/
