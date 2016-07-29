@@ -2,20 +2,22 @@ topics
 basic model
 linear regression
 logistical regression
+softmax and cross entropy
+(plus, sigmoid, tanh, relu, "由于使用的是ReLU神经元，因此比较好的做法是用一个较小的正数来初始化偏置项，以避免神经元节点输出恒为0的问题（dead neurons）")
 svm
 pca
 baysian model
 markov process
 hidden markov model
-deep learning for image cognition
-neural machine translation
+nerual network
+convolutional nerual network
 recurrent neural network
-LSTM
-attention machanism
+(plus LSTM, GRU)
+neural machine translation
+(plus attention machanism)
 (Recurrent Neural Networks are known to have problems dealing with long-range (e.g., 50 words) dependencies. In theory, architectures like LSTMs should be able to deal with this, but in practice long-range dependencies are still problematic;
 http://www.wildml.com/2016/01/attention-and-memory-in-deep-learning-and-nlp/)
-dynamic neural network
-end-to-end memory network
+dynamic memory network & end-to-end memory network
 
 --more
 k-mean
