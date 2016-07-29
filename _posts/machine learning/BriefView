@@ -31,3 +31,9 @@ www.wildml.com
 csdn blog
 cs224d stanford
 cs229 stanford
+
+--Explanation on entropy of information theory
+http://colah.github.io/posts/2015-09-Visual-Information/
+
+--Explanation on the essence of backward propogation
+http://colah.github.io/posts/2015-08-Backprop/
