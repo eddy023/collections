@@ -5,31 +5,17 @@
     <title>{{ page.title }}</title>
     <link href="/collections/css/default.css" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0;}
+        * { margin: 0; padding: 0; box-sizing: border-box;}
         .wrap-inner { width: 900px; margin: 10px auto;}
+        .navwrap { width: 100%; height: 55px; box-shadow: 0 1px 2px 0 #ccc; background: #000;}
+        .navwrap .nav { width: 900px; margin: 0 auto; height: 55px;}
+        .navwrap .nav h1 { font-size: 30px; color: #fff; height: 54px; line-height: 54px;}
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
-        <div class="container">
-            <!--Toggle header for mobile-->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand active" href="../../" style="font-size:20px;">colah's blog</a>
-            </div>
-            <!--normal header-->
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="../../archive.html"><span class="glyphicon glyphicon-pencil"></span>  Blog</a></li>
-                    <li><a href="../../about.html"><span class="glyphicon glyphicon-user"></span>  About</a></li>
-                    <li><a href="../../contact.html"><span class="glyphicon glyphicon-envelope"></span>  Contact</a></li>
-                </ul>
-            </div><!--/.nav-collapse -->
+    <nav class="navwrap">
+        <div class="nav">
+            <h1>blog</h1>
         </div>
     </nav>
     <div class="wrap-inner">
