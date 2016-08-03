@@ -1,0 +1,7 @@
+---
+layout: default
+title: Tips of Installation of Scrapy-redis
+---
+<p>If install with pip, no problem found, but the code for a crawler needs to be confined with python2.*.</p>
+<p>If install with pip3, there might be a problem with "no such file as openssl/opensslv.h".</p>
+<p>In this case, run "sudo apt-get install libssl-dev" to install header file and lib of OpenSSL.</p>
