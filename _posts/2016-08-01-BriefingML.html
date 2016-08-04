@@ -43,7 +43,7 @@ pairs are never presented, nor sub-optimal actions explicitly corrected.", as I 
 <p>$$ y = \sum_{i=0}^n \theta_i \times x_i + \theta_i' \times x_i^2 + ... $$</p>
 <p>\(n\) represents the number of features, e.g., house area, location, floor, etc. for hourse price prediction. Introducing higher order of them may help improve the prediction accuracy, but as having said, needs to trade between under-fitting and over-fitting</p>
 <p>To fit the line to data, we need a criterion on how well the line is fitted and thus we need a cost function:</p>
-<p>$$J(\theta) = 1/2 \times \sum_{j=0}^m (\sum_{i=0}^n \theta_i \times x_i^{(j)} - y_j)^2 $$</p>
+<p>$$J(\theta) = \frac{1}{2m}\sum_{j=0}^m (\sum_{i=0}^n \theta_i \times x_i^{(j)} - y_j)^2 $$</p>
 <p>\(m\) is the number of training data size, that is, the number of (\(x\), \(y\)) pairs.<p>
 <br />
 <p style="font-size:18px; font-style:italic; font-weight:bold">2. Logistical Regression</p>
