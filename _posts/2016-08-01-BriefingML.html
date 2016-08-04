@@ -33,7 +33,7 @@ pairs are never presented, nor sub-optimal actions explicitly corrected.", as I 
 <br/>
 <p style="font-size:24px; font-weight:bold">II. Regession & Cross Entropy</p>
 <br />
-<p style="font-size:18px; font-style:italic">1 Linear Regression</p>
+<p style="font-size:18px; font-style:italic">1. Linear Regression</p>
 <p>Linear regression is oftenly used to trian a "mapping" to predict the value of a CONTINUOUS variable (e.g., temperature, housing price, visitors, etc). Given a set of data with some inherent linear structure, we try fitting a line into the "sparse data". The data look likes "regressing" into a line which could be straight, curve, or more complicated shape, depends on the model choosed. The gist is to seek balance between under-fitting and over-fitting of data. </p>
 <p style="text-align:center"><img src="/collections/imgs/2-linear-regression.png" style="width:400px;height:300px;" /><img src="/collections/imgs/2-linear-regression2.png" style="width:400px;height:300px;" /></p>
 <p style="text-align:center; font-style:italic; font-weight:bold">Fig. 2-1 Two examples of linear regression</p>
@@ -46,18 +46,19 @@ pairs are never presented, nor sub-optimal actions explicitly corrected.", as I 
 <p>$$J(\theta) = 1/2 \times \sum_{j=0}^m (\sum_{i=0}^n \theta_i \times x_i^{(j)} - y_j)^2 $$</p>
 <p>\(m\) is the number of training data size, that is, the number of (\(x\), \(y\)) pairs.<p>
 <br />
-<p style="font-size:18px; font-style:italic; font-weight:bold">2 Logistical Regression</p>
+<p style="font-size:18px; font-style:italic; font-weight:bold">2. Logistical Regression</p>
 <p>Logistical regression would learn a model to classify data into two groups (e.g., spam email filter). To do this, we apply a logistical or sigmoid function on the linear regression model, which "squashes" y's domain from (-inf,inf) to (0,1). We benefit from two aspects: 1) we can interpret the value of y in (0,1) as a probability variable to construct a cost functoin; 2) the logistical function is derivative in (-inf, inf) to be applied with optimzation algorithm. Actually, sigmoid function is believed as the simplest example of a log-linear model which presents a dozen favorable attributes.</p>
 <p>$$ y = \frac{1}{1+e^{\theta^{T}X}} $$</p>
 <p>In above logistical model, \(\theta\) and \(X\) are vectors and \(T\) is transpose.</p>
 <p style="text-align:center"><img src="/collections/imgs/2-sigmoid-function.png" style="width:400px;height:300px;" /></p>
 <p style="text-align:center; font-style:italic; font-weight:bold">Fig. 2-2 Logistical/Sigmoild function</p>
 <br />
-<p style="font-size:18px; font-style:italic; font-weight:bold">3 Under-fitting & Over-fitting</p>
+<p style="font-size:18px; font-style:italic; font-weight:bold">3. Under-fitting & Over-fitting</p>
 <p>Overfitting occurs when a statistical model or machine learning algorithm captures the noise of the data. Intuitively, overfitting occurs when the model or the algorithm fits the data too well. Specifically, overfitting occurs if the model or algorithm shows low bias but high variance.  Overfitting is often a result of an excessively complicated model, and it can be prevented by fitting multiple models and using validation or cross-validation to compare their predictive accuracies on test data.</p>
 <p>Underfitting occurs when a statistical model or machine learning algorithm cannot capture the underlying trend of the data.  Intuitively, underfitting occurs when the model or the algorithm does not fit the data well enough.  Specifically, underfitting occurs if the model or algorithm shows low variance but high bias.  Underfitting is often a result of an excessively simple model.</p>
-<p>Usually, we employ two terms bias and variance to judge whether a learnt model is overfitting or underfitting. <a href="http://www.inf.ed.ac.uk/teaching/courses/mlsc/Notes/Lecture4/BiasVariance.pdf">"The Bias-Variance Tradeoff"</a> provides a detailed explanation.</p>
-
+<p>Usually, we employ two terms bias and variance to judge whether a learnt model is overfitting or underfitting. <a href="http://www.inf.ed.ac.uk/teaching/courses/mlsc/Notes/Lecture4/BiasVariance.pdf">"The Bias-Variance Tradeoff"</a> provides a detailed explanation on how they are deduced.</p>
+<p>In practical projects, we would plot a figure according to training error and cross validation to reflect the bias and vairance.
+ Read this <a href="">post</a> for details.</p>
 <p style="text-align:center"><img src="/collections/imgs/2-fitting-problem.png" style="width:800px;height:600px;" /></p>
 <p style="text-align:center; font-style:italic; font-weight:bold">Fig. 2-2 Under-/Over-fitting</p>
 <br />
