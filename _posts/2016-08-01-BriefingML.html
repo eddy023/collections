@@ -53,6 +53,9 @@ pairs are never presented, nor sub-optimal actions explicitly corrected.", as I 
 <p style="text-align:center"><img src="/collections/imgs/2-sigmoid-function.png" style="width:400px;height:300px;" /></p>
 <p style="text-align:center; font-style:italic; font-weight:bold">Fig. 2-2 Logistical/Sigmoild function</p>
 <br />
+<p>$$ J(\theta) = -\left[ \sum_{i=1}^m y^{(i)} \log h_\theta(x^{(i)}) + (1-y^{(i)}) \log (1-h_\theta(x^{(i)})) \right] $$</p>
+<p>\(J(\theta)\) is the cost function for logistical regression. It's simply deduced from take log-function on the likehood formula of \(y\)'s probablity.</p>
+
 <p style="font-size:18px; font-style:italic; font-weight:bold">3. Under-fitting & Over-fitting</p>
 <p>Overfitting occurs when a statistical model or machine learning algorithm captures the noise of the data. Intuitively, overfitting occurs when the model or the algorithm fits the data too well. Specifically, overfitting occurs if the model or algorithm shows low bias but high variance.  Overfitting is often a result of an excessively complicated model, and it can be prevented by fitting multiple models and using validation or cross-validation to compare their predictive accuracies on test data.</p>
 <p>Underfitting occurs when a statistical model or machine learning algorithm cannot capture the underlying trend of the data.  Intuitively, underfitting occurs when the model or the algorithm does not fit the data well enough.  Specifically, underfitting occurs if the model or algorithm shows low variance but high bias.  Underfitting is often a result of an excessively simple model.</p>
@@ -69,9 +72,28 @@ pairs are never presented, nor sub-optimal actions explicitly corrected.", as I 
 <p style="font-size:18px; font-style:italic; font-weight:bold">5. Parameter Learning </p>
 <p>The learning process is to find the set of parameters \(\theta\) that minimize the cost functin. The cost function for linear and logistical regression are convex, hence we can apply a bunch of optimization algorithms to find an optimal value. A well known algorithm is Newton's method, but it involves calcuating inverse matrix which is computation resource intensive when come to large number of parameters, so we simply apply gradient descent of which the gist is to reduce the cost toward its gradient's direction step by step, till a criterion is met:</p>
 <p>$$ \theta = \theta - \alpha \times \nabla_\theta J(\theta) = \theta - \alpha \times \sum_{j=0}^m (\sum_{i=0}^n \theta_i \times x_i^{(j)} - y_j) \cdot x $$</p>
-<p>We use linear regression as a example and the cost function is the Euclidean distance between \(h(\theta)\) and \(y\); \(\alpha\) is the learning rate and there are more advanced algorithm that would automatically control its value to speed up the learning process.</p>
+<p>We use linear regression as a example and the cost function is the Euclidean distance between \(h(\theta)\) and \(y\); \(\alpha\) is the learning rate and in more advanced algorithm it would be automatically modulated to learn faster.</p>
 <br />
 <p style="font-size:18px; font-style:italic; font-weight:bold">6. Softmax and Cross Entropy</p>
+<p>Logistical regression classfies the output into two groups, and when we have much more classes, we apply softmax regression.</p>
+<p>$$
+h_\theta(x) =
+\begin{bmatrix}
+P(y = 1 | x; \theta) \\
+P(y = 2 | x; \theta) \\
+\vdots \\
+P(y = K | x; \theta)
+\end{bmatrix}
+=
+\frac{1}{ \sum_{j=1}^{K}{\exp(\theta^{(j)\top} x) }}
+\begin{bmatrix}
+\exp(\theta^{(1)\top} x ) \\
+\exp(\theta^{(2)\top} x ) \\
+\vdots \\
+\exp(\theta^{(K)\top} x ) \\
+\end{bmatrix}
+$$</p>
+
 <br />
 <p style="font-size:24px; font-weight:bold">III. K-Mean and SVM</p>
 
