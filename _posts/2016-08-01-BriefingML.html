@@ -75,7 +75,7 @@ pairs are never presented, nor sub-optimal actions explicitly corrected.", as I 
 <p>We use linear regression as a example and the cost function is the Euclidean distance between \(h(\theta)\) and \(y\); \(\alpha\) is the learning rate and in more advanced algorithm it would be automatically modulated to learn faster.</p>
 <br />
 <p style="font-size:18px; font-style:italic; font-weight:bold">6. Softmax and Cross Entropy</p>
-<p>Logistical regression classfies the output into two groups, and when we have much more classes, we apply softmax regression.</p>
+<p>Logistical regression classfies the output into two groups, and when there are more classes, we apply softmax regression.</p>
 <p>$$
 h_\theta(x) =
 \begin{bmatrix}
@@ -93,6 +93,21 @@ P(y = K | x; \theta)
 \exp(\theta^{(K)\top} x ) \\
 \end{bmatrix}
 $$</p>
+<p>Here \(\theta^{(1)}, \theta^{(2)}, \ldots, \theta^{(K)} \in \Re^{n}\) are the parameters of our model. Notice that the term \(\frac{1}{ \sum_{j=1}^{K}{\exp(\theta^{(j)\top} x) } }\) normalizes the distribution, so that it sums to one.</p>
+<p>$$
+J(\theta) = - \left[ \sum_{i=1}^{m} \sum_{k=1}^{K}  1\left\{y^{(i)} = k\right\} \log \frac{\exp(\theta^{(k)\top} x^{(i)})}{\sum_{j=1}^K \exp(\theta^{(j)\top} x^{(i)})}\right]
+$$</p>
+<p>The cost function of softmax regression is usually called cross entropy, which is an idea from information theory.</p>
+<p>Notice that this generalizes the logistic regression cost function, which could also have been written:</p>
+<p>$$
+J(\theta) &= - \left[ \sum_{i=1}^m   (1-y^{(i)}) \log (1-h_\theta(x^{(i)})) + y^{(i)} \log h_\theta(x^{(i)}) \right] \\
+&= - \left[ \sum_{i=1}^{m} \sum_{k=0}^{1} 1\left\{y^{(i)} = k\right\} \log P(y^{(i)} = k | x^{(i)} ; \theta) \right]
+$$</p>
+<p>To train data with gradient descent method, firstly need to find the form of gradient of \(J(\theta)\):</p>
+<p>$$
+\nabla_{\theta^{(k)}} J(\theta) = - \sum_{i=1}^{m}{ \left[ x^{(i)} \left( 1\{ y^{(i)} = k\}  - P(y^{(i)} = k | x^{(i)}; \theta) \right) \right]  }
+$$</p>
+<p>Softmax regression is hugely useful, in deep nerual network, the last layer would usually adopt softmax regression to finally classify an object.</p>
 
 <br />
 <p style="font-size:24px; font-weight:bold">III. K-Mean and SVM</p>
