@@ -69,7 +69,7 @@ pairs are never presented, nor sub-optimal actions explicitly corrected.", as I 
 <p style="font-size:18px; font-style:italic; font-weight:bold">5. Parameter Learning </p>
 <p>The learning process is to find the set of parameters \(\theta\) that minimize the cost functin. The cost function for linear and logistical regression are convex, hence we can apply a bunch of optimization algorithms to find an optimal value. A well known algorithm is Newton's method, but it involves calcuating inverse matrix which is computation resource intensive when come to large number of parameters, so we simply apply gradient descent of which the gist is to reduce the cost toward its gradient's direction step by step, till a criterion is met:</p>
 <p>$$ \theta = \theta - \alpha \times \nabla_\theta J(\theta) = \theta - \alpha \times \sum_{j=0}^m (\sum_{i=0}^n \theta_i \times x_i^{(j)} - y_j) \cdot x $$</p>
-<p>We use linear regression as a example and the cost function is the Euclidean distance between \(h(\theta)\) and \(y\).</p>
+<p>We use linear regression as a example and the cost function is the Euclidean distance between \(h(\theta)\) and \(y\); \(\alpha\) is the learning rate and there are more advanced algorithm that would automatically control its value to speed up the learning process.</p>
 <br />
 <p style="font-size:18px; font-style:italic; font-weight:bold">6. Softmax and Cross Entropy</p>
 <br />
