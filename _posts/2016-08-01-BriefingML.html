@@ -31,11 +31,12 @@ pairs are never presented, nor sub-optimal actions explicitly corrected.", as I 
 <p style="text-align:center"><img src="/collections/imgs/1-robot-walk.png" style="width:400px;height:300px;" /><img src="/collections/imgs/1-quadriplane-fly.png" style="width:400px;height:300px;" /></p>
 <p style="text-align:center; font-style:italic">Fig. 1-3 Robot walking and quadriplane flying</p>
 <br/>
-<p style="font-size:24px; font-weight:bold">II. Linear/Logistical/Softmax Regession & Cross Entropy</p>
-<p style="font-size:18px; font-style:italic">1.1 Linear regression</p>
+<p style="font-size:24px; font-weight:bold">II. Regession & Cross Entropy</p>
+<br />
+<p style="font-size:18px; font-style:italic">1 Linear Regression</p>
 <p>Linear regression is oftenly used to trian a "mapping" to predict the value of a CONTINUOUS variable (e.g., temperature, housing price, visitors, etc). Given a set of data with some inherent linear structure, we try fitting a line into the "sparse data". The data look likes "regressing" into a line which could be straight, curve, or more complicated shape, depends on the model choosed. The gist is to seek balance between under-fitting and over-fitting of data. </p>
 <p style="text-align:center"><img src="/collections/imgs/2-linear-regression.png" style="width:400px;height:300px;" /><img src="/collections/imgs/2-linear-regression2.png" style="width:400px;height:300px;" /></p>
-<p style="text-align:center; font-style:italic">Fig. 2-1 Two examples of linear regression</p>
+<p style="text-align:center; font-style:italic; font-weight:bold">Fig. 2-1 Two examples of linear regression</p>
 <p>In Fig. 2-1, the first sub-figure simply follows the model:</p>
 <p>$$ y = \sum_{i=0}^n \theta_i \times x_i $$</p>
 <p>For the sub-figure in the right, higher order features were introduced:</p>
@@ -44,6 +45,45 @@ pairs are never presented, nor sub-optimal actions explicitly corrected.", as I 
 <p>To fit the line to data, we need a criterion on how well the line is fitted and thus we need a cost function:</p>
 <p>$$J(\theta) = 1/2 \times \sum_{j=0}^m (\sum_{i=0}^n \theta_i \times x_i^{(j)} - y_j)^2 $$</p>
 <p>\(m\) is the number of training data size, that is, the number of (\(x\), \(y\)) pairs.<p>
-<p style="font-size:18px; font-style:italic">1.2 Under-fitting & Over-fitting</p>
+<br />
+<p style="font-size:18px; font-style:italic; font-weight:bold">2 Logistical Regression</p>
+
+<br />
+<p style="font-size:18px; font-style:italic; font-weight:bold">3 Under-fitting & Over-fitting</p>
+<p>Overfitting occurs when a statistical model or machine learning algorithm captures the noise of the data. Intuitively, overfitting occurs when the model or the algorithm fits the data too well. Specifically, overfitting occurs if the model or algorithm shows low bias but high variance.  Overfitting is often a result of an excessively complicated model, and it can be prevented by fitting multiple models and using validation or cross-validation to compare their predictive accuracies on test data.</p>
+<p>Underfitting occurs when a statistical model or machine learning algorithm cannot capture the underlying trend of the data.  Intuitively, underfitting occurs when the model or the algorithm does not fit the data well enough.  Specifically, underfitting occurs if the model or algorithm shows low variance but high bias.  Underfitting is often a result of an excessively simple model.</p>
+
+<p style="font-size:18px; font-style:italic; font-weight:bold">4 Weighted Regression</p>
+
+<br />
+<p style="font-size:24px; font-weight:bold">III. K-Mean and SVM</p>
+
+<br />
+<p style="font-size:24px; font-weight:bold">IV. Baysian Model and Markov Process</p>
+
+<br />
+<p style="font-size:24px; font-weight:bold">V. Hidden Markov Process and EM Algorithm</p>
+
+<br />
+<p style="font-size:24px; font-weight:bold">VI. Convolutional Nerual Network</p>
+
+<br />
+<p style="font-size:24px; font-weight:bold">VII. Recurrent Nerual Network</p>
+
+<br />
+<p style="font-size:24px; font-weight:bold">VIII. LSTM, GRU and Seq2seq Model</p>
+<br />
+<p style="font-size:18px; font-style:italic; font-weight:bold">1 LSTM and GRU Cell</p>
+<br />
+<p style="font-size:18px; font-style:italic; font-weight:bold">2 Seq2seq Model</p>
+
+<br />
+<p style="font-size:24px; font-weight:bold">IX. Dynamic Memory Network</p>
+
+<br />
+<p style="font-size:24px; font-weight:bold">X. Scrapy Redis</p>
+
+<br />
+<p style="font-size:24px; font-weight:bold">XI. Tensorflow, Theano and Caffe</p>
 
 
