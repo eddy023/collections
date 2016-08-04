@@ -48,7 +48,7 @@ pairs are never presented, nor sub-optimal actions explicitly corrected.", as I 
 <br />
 <p style="font-size:18px; font-style:italic; font-weight:bold">2 Logistical Regression</p>
 <p>Logistical regression would learn a model to classify data into two groups (e.g., spam email filter). To do this, we apply a logistical or sigmoid function on the linear regression model, which "squashes" y's domain from (-inf,inf) to (0,1). We benefit from two aspects: 1) we can interpret the value of y in (0,1) as a probability variable to construct a cost functoin; 2) the logistical function is derivative in (-inf, inf) to be applied with optimzation algorithm. Actually, sigmoid function is believed as the simplest example of a log-linear model which presents a dozen favorable attributes.</p>
-<p>$$ y = \frac{1}{1+e^{\theta^TX}} $$</p>
+<p>$$ y = \frac{1}{1+e^{\theta^{T}X}} $$</p>
 <p>In above logistical model, \(\theta\) and \(X\) are vectors and \(T\) is transpose.</p>
 <p style="text-align:center"><img src="/collections/imgs/2-sigmoid-function.png" style="width:400px;height:300px;" /></p>
 <p style="text-align:center; font-style:italic; font-weight:bold">Fig. 2-2 Logistical/Sigmoild function</p>
