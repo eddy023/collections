@@ -100,7 +100,7 @@ $$</p>
 <p>The cost function of softmax regression is usually called cross entropy, which is an idea from information theory.</p>
 <p>Notice that this generalizes the logistic regression cost function, which could also have been written:</p>
 <p>$$
-J(\theta) &= - \left[ \sum_{i=1}^m   (1-y^{(i)}) \log (1-h_{\theta(x^{(i)}))} + y^{(i)} \log h_{\theta(x^{(i)})} \right] \\
+J(\theta) &= - \left[ \sum_{i=1}^m   (1-y^{(i)}) \log (1-h_{\theta(x^{(i)})} + y^{(i)} \log h_{\theta(x^{(i)})} \right] \\
 &= - \left[ \sum_{i=1}^{m} \sum_{k=0}^{1} 1\left\{y^{(i)} = k\right\} \log P(y^{(i)} = k | x^{(i)} ; \theta) \right]
 $$</p>
 <p>To train data with gradient descent method, firstly need to find the form of gradient of \(J(\theta)\):</p>
@@ -138,15 +138,14 @@ $$</p>
 <p>Here \(g\) is the activation function and \(a\) is the output or activated of a input.</p>
 <br />
 <p style="font-size:18px; font-style:italic; font-weight:bold">3. Backword Propagation</p>
-<p>Back propagation basically takes the output you got from your network, compares it to the real value (y) and calculates how wrong the network was (i.e. how wrong the parameters were). It then, using the error you've just calculated, back-calculates the error associated with each unit from the preceding layer (i.e. layer L - 1). This goes on until you reach the input layer (where obviously there is no error, as the activation is the input). These "error" measurements for each unit can be used to calculate the partial derivatives, which gradient descent needs to minimize the cost function. We use the partial derivatives with gradient descent to try minimize the cost function and update all the Ɵ values. This repeats until gradient descent reports convergence.</p>
+<p>Back propagation basically takes the output you got from your network, compares it to the real value \(y\) and calculates how wrong the network was (i.e. how wrong the parameters were). It then, using the error you've just calculated, back-calculates the error associated with each unit from the preceding layer (i.e. layer L - 1). This goes on until you reach the input layer (where obviously there is no error, as the activation is the input). These "error" measurements for each unit can be used to calculate the partial derivatives, which gradient descent needs to minimize the cost function. We use the partial derivatives with gradient descent to try minimize the cost function and update all the Ɵ values. This repeats until gradient descent reports convergence.</p>
 <p style="text-align:center"><img src="/collections/imgs/6-backward-p.png" style="width:650px;height:400px;" /></p>
 <p style="text-align:center; font-style:italic; font-weight:bold">Fig. 6-5 Backward propagation</p>
 <p>Read <a href="http://work.caltech.edu/slides/slides10.pdf">Caltech's</a> lecture slides for detailed explanation.</p>
-<p style="text-align:center"><img src="/collections/imgs/6-bp-deduce.png" style="width:800px;height:500px;" /></p>
+<p style="text-align:center"><img src="/collections/imgs/6-bp-deduce.png" style="width:900px;height:500px;" /></p>
 <p style="text-align:center; font-style:italic; font-weight:bold">Fig. 6-6 Derivation of \(\delta\)</p>
 
 <br />
-
 <p style="font-size:24px; font-weight:bold">VII. Convolutional Nerual Network</p>
 
 <br />
