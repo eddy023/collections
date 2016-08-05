@@ -122,27 +122,27 @@ $$</p>
 <br />
 <p style="font-size:18px; font-style:italic; font-weight:bold">1. Representation</p>
 <p>Neural networks were developed as a way to simulate networks of neurones.</p>
-<p style="text-align:center"><img src="/collections/imgs/6-neuron.png" style="width:450px;height:350px;" /></p>
+<p style="text-align:center"><img src="/collections/imgs/6-neuron.png" style="width:500px;height:350px;" /></p>
 <p style="text-align:center; font-style:italic; font-weight:bold">Fig. 6-1 Structure of a Neuron</p>
 <p>In below figure, we use a simple neural network to represent the logistical regression.<p>
-<p style="text-align:center"><img src="/collections/imgs/6-logistical-regression.png" style="width:450px;height:350px;" /></p>
+<p style="text-align:center"><img src="/collections/imgs/6-logistical-regression.png" style="width:550px;height:350px;" /></p>
 <p style="text-align:center; font-style:italic; font-weight:bold">Fig. 6-2 Logistical regression with NN</p>
 <p>A typical neural network with input-, hidden- and output-layer is given below. We may use sigmoid function as the activiation function at all nodes. By activation, we mean the value which is computed and output by that node.</p>
-<p style="text-align:center"><img src="/collections/imgs/6-basic-NN.png" style="width:450px;height:350px;" /></p>
+<p style="text-align:center"><img src="/collections/imgs/6-basic-NN.png" style="width:550px;height:350px;" /></p>
 <p style="text-align:center; font-style:italic; font-weight:bold">Fig. 6-3 A three-layer neural network</p>
 <br />
 <p style="font-size:18px; font-style:italic; font-weight:bold">2. Forward Propagation</p>
 <p>Training a neural involves two phases per iteration, started with forwarding propagation:</p>
-<p style="text-align:center"><img src="/collections/imgs/6-forward-p.png" style="width:500px;height:400px;" /></p>
+<p style="text-align:center"><img src="/collections/imgs/6-forward-p.png" style="width:600px;height:400px;" /></p>
 <p style="text-align:center; font-style:italic; font-weight:bold">Fig. 6-4 Forward propagation</p>
 <p>Here \(g\) is the activation function and \(a\) is the output or activated of a input.</p>
 <br />
 <p style="font-size:18px; font-style:italic; font-weight:bold">3. Backword Propagation</p>
 <p>Back propagation basically takes the output you got from your network, compares it to the real value (y) and calculates how wrong the network was (i.e. how wrong the parameters were). It then, using the error you've just calculated, back-calculates the error associated with each unit from the preceding layer (i.e. layer L - 1). This goes on until you reach the input layer (where obviously there is no error, as the activation is the input). These "error" measurements for each unit can be used to calculate the partial derivatives, which gradient descent needs to minimize the cost function. We use the partial derivatives with gradient descent to try minimize the cost function and update all the Ɵ values. This repeats until gradient descent reports convergence.</p>
-<p style="text-align:center"><img src="/collections/imgs/6-backward-p.png" style="width:500px;height:400px;" /></p>
+<p style="text-align:center"><img src="/collections/imgs/6-backward-p.png" style="width:650px;height:400px;" /></p>
 <p style="text-align:center; font-style:italic; font-weight:bold">Fig. 6-5 Backward propagation</p>
 <p>Read <a href="http://work.caltech.edu/slides/slides10.pdf">Caltech's</a> lecture slides for detailed explanation.</p>
-<p style="text-align:center"><img src="/collections/imgs/6-bp-deduce.png" style="width:600px;height:500px;" /></p>
+<p style="text-align:center"><img src="/collections/imgs/6-bp-deduce.png" style="width:800px;height:500px;" /></p>
 <p style="text-align:center; font-style:italic; font-weight:bold">Fig. 6-6 Derivation of \(\epsilon\)</p>
 
 <br />
