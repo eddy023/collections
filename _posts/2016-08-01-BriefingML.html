@@ -166,10 +166,10 @@ $$</p>
 it assigns a probability \(P(w_{1},..., w_{m})\) to the whole sequence. Below some models to calculate the probability are
 provided:</p>
 <p>a. Uni-gram</p>
-<p>$$ P(t_{1}t_{2}t_{3}...t_{n})&=P(t_{1})P(t_{2}|t_{1})P(t_{3}|t_{1}t_{2})}...P(t_{n}|t_{1}t_{2}...t{n-1})&=P(t_{1})P(t_{2})...P(t_{n}) $$ </p>
+<p>$$ P(t_{1}t_{2}t_{3} \cdots t_{n})&=P(t_{1})P(t_{2}|t_{1})P(t_{3}|t_{1}t_{2})} \cdots P(t_{n}|t_{1}t_{2} \cdots t_{n-1})&=P(t_{1})P(t_{2}) \cdots P(t_{n}) $$ </p>
 <p>In the second step, it's assumed that each word is independent from each other.</p>
 <p>b. N-gram</p>
-<p>$$ P(t_{1}t_{2}t_{3}...t_{n})&=P(t_{1})P(t_{2}|t_{1})P(t_{3}|t_{1}t_{2})}...P(t_{n}|t_{1}t_{2}...t{n-1})&=P(t_{1})P(t_{2}|t_{1})...P(t_{n}|t_{1}) $$ </p>
+<p>$$ P(t_{1}t_{2}t_{3} \cdots t_{n})&=P(t_{1})P(t_{2}|t_{1})P(t_{3}|t_{1}t_{2})} \cdots P(t_{n}|t_{1}t_{2} \cdots t_{n-1})&=P(t_{1})P(t_{2}|t_{1}) \cdots P(t_{n}|t_{n-1}) $$ </p>
 <p>The second step assumes a 2-gram model which means the occurance of a word is solely dependent on its previous one. To calculate \(P(t_{n}|t_{1})\), simply count
 the times the pair appears in the training data.</p>
 <p>c. Continuous space language model</p>
