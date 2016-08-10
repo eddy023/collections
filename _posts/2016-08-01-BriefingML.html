@@ -1,4 +1,4 @@
----
+ ---
 layout: default
 title: A Quick Look into Machine Learning Algorithms
 ---
@@ -75,7 +75,7 @@ pairs are never presented, nor sub-optimal actions explicitly corrected.", as I 
 <p>We use linear regression as a example and the cost function is the Euclidean distance between \(h(\theta)\) and \(y\); \(\alpha\) is the learning rate and in more advanced algorithm it would be automatically modulated to learn faster.</p>
 <br />
 <p style="font-size:18px; font-style:italic; font-weight:bold">6. Softmax and Cross Entropy</p>
-<p>Logistical regression classfies the output into two groups, and when there are more classes, we apply softmax regression.</p>
+<p>Logistical regression classfies target objects into two groups, and when come with more classes, we apply softmax regression for classification.</p>
 <p>$$
 h_\theta(x) =
 \begin{bmatrix}
@@ -161,12 +161,32 @@ $$</p>
 <br />
 <p style="font-size:24px; font-weight:bold">X. Chatterbot</p>
 <br />
-<p style="font-size:18px; font-style:italic; font-weight:bold">1 Tradiation Language Modelling</p>
+<p style="font-size:18px; font-style:italic; font-weight:bold">1 Language Modelling</p>
+<p>A statistical language model is a probability distribution over sequences of words.Given such a sequence, say of length \(m\),
+it assigns a probability \(P(w_{1},..., w_{m})\) to the whole sequence. Below some models to calculate the probability are
+provided:</p>
+<p>a. Uni-gram</p>
+<p>$$ P(t_{1}t_{2}t_{3}...t_{n})&=P(t_{1})P(t_{2}|t_{1})P(t_{3}|t_{1}t_{2})}...P(t_{n}|t_{1}t_{2}...t{n-1})&=P(t_{1})P(t_{2})...P(t_{n}) $$ </p>
+<p>In the second step, it's assumed that each word is independent from each other.</p>
+<p>b. N-gram</p>
+<p>$$ P(t_{1}t_{2}t_{3}...t_{n})&=P(t_{1})P(t_{2}|t_{1})P(t_{3}|t_{1}t_{2})}...P(t_{n}|t_{1}t_{2}...t{n-1})&=P(t_{1})P(t_{2}|t_{1})...P(t_{n}|t_{1}) $$ </p>
+<p>The second step assumes a 2-gram model which means the occurance of a word is solely dependent on its previous one. To calculate \(P(t_{n}|t_{1})\), simply count
+the times the pair appears in the training data.</p>
+<p>c. Continuous space language model</p>
+<p>Continuous space language models use continuous representations or embeddings of words to make their predictions.
+Neural network based language models are an example but there are other varieties such as log-bilinear models.
+Typically, neural net language models are constructed and trained as probabilistic classifiers that learn to predict a probability distribution
+\(P(w_{t}|context) \forall \in V\). The network is trained to predict a probability distribution over the vocabulary, given some linguistic context.
+This is done using standard neural network training algorithms such as stochastic gradient descent with backpropagation.It can use previous or future words to
+make the prediction of the current words, ore reversely, using the current word to learn the context which is called "skip-gram" that yields faster training rate.
+Skip-gram is the basic for the popular word2vec program.</p>
 <br />
-<p style="font-size:18px; font-style:italic; font-weight:bold">2 Nerual Language Modelling</p>
+<p style="font-size:18px; font-style:italic; font-weight:bold">2 Word Embedding</p>
 <br />
-<p style="font-size:18px; font-style:italic; font-weight:bold">3 Word Embedding</p>
+
 <br />
+<p style="font-size:18px; font-style:italic; font-weight:bold">3 Nerual Language Modelling</p>
+
 <p style="font-size:18px; font-style:italic; font-weight:bold">4 Neural Converation Model</p>
 
 
