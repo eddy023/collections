@@ -156,17 +156,20 @@ $$</p>
 <p style="text-align:center"><img src="/collections/imgs/7-convolution_schematic.gif" style="width:600px;height:400px;" /></p>
 <p style="text-align:center; font-style:italic; font-weight:bold">Fig. 7-2 Convolved feature of an image</p>
 <p>To be more intuitive, the below picture shows how a stack of features is combined into an image.<p>
-<p style="text-align:center"><img src="/collections/imgs/7-features.png" style="width:600px;height:600px;" /></p>
+<p style="text-align:center"><img src="/collections/imgs/7-features.png" style="width:800px;height:600px;" /></p>
 <p style="text-align:center; font-style:italic; font-weight:bold">Fig. 7-3 Trainning on face images</p>
 <p>Features are learnt layer by layer from bottom to the top and can be done with autoencoder or sparse coding.</p>
-<p style="text-align:center"><img src="/collections/imgs/7-feature_layered.png" style="width:600px;height:600px;" /></p>
+<p style="text-align:center"><img src="/collections/imgs/7-feature_layered.png" style="width:800px;height:600px;" /></p>
 <p style="text-align:center; font-style:italic; font-weight:bold">Fig. 7-4 Learning feature hiearchies</p>
 <p>Intuitively, after filter by a edge dector, an image may look like: </p>
-<p style="text-align:center"><img src="/collections/imgs/7-feature_layered.png" style="width:600px;height:600px;" /></p>
+<p style="text-align:center"><img src="/collections/imgs/7-edge.png" style="width:800px;height:600px;" /></p>
 <p style="text-align:center; font-style:italic; font-weight:bold">Fig. 7-5 Before and after of filter by edge detector</p>
 <p>Refer to <a href="http://ufldl.stanford.edu/tutorial/unsupervised/Autoencoders/">stanford's deep learning website</a> for details of autoencoder. Briefly, it's an unsupervised learning algorithm which use the input as the output. The hidden layer are features to learn. The weight matrix between the input layer and the hidder layer are the intended feature detectors.</p>
-<p style="text-align:center"><img src="/collections/imgs/7-autoencoder.png" style="width:600px;height:600px;" /></p>
+<p style="text-align:center"><img src="/collections/imgs/7-autoencoder.png" style="width:700px;height:600px;" /></p>
 <p style="text-align:center; font-style:italic; font-weight:bold">Fig. 7-6 An example of autoencoder</p>
+<p>Fig. 7-7 shows an end-to-end deep convolutional neural network. Note that the final layer applies softmax regression.</p>
+<p style="text-align:center"><img src="/collections/imgs/7-cnn_arch.png" style="width:900px;height:500px;" /></p>
+<p style="text-align:center; font-style:italic; font-weight:bold">Fig. 7-6 Demonstration of a deep CNN</p>
 
 <br />
 <p style="font-size:24px; font-weight:bold">VIII. Recurrent Neural Network</p>
