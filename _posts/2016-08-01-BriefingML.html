@@ -173,7 +173,13 @@ $$</p>
 
 <br />
 <p style="font-size:24px; font-weight:bold">VIII. Recurrent Neural Network</p>
-
+<p>Unlike feed forward neural network, a recurrent neural network reuses the same set of parameters per iteration. This allows RNN maintain a dynamic state that suitable for dealing with variable length problems.</p>
+<p style="text-align:center"><img src="/collections/imgs/8-RNN-1.png" style="width:900px;height:400px;" /><img src="/collections/imgs/8-RNN-2.png" style="width:900px;height:400px;" /></p>
+<p style="text-align:center; font-style:italic; font-weight:bold">Fig. 8-1 An illustration of the structure of RNN</p>
+<p>For a single time step, we have:</p>
+<p>$$ h_{t} = \sigma(W_{hh} h_{t-1} + W_{hx} x_{t}) $$ </p>
+<p>$$ y_{t} = softmax(W_{s} h_{t}) $$ </p>
+<p>where \(W_{hh} \in R_{D_{h} \times R_{D_{h}}}, W_{hx} \in R_{D_{h} \times d} and W_(s) \in R_{|V| \times D_{h}} \)</p>
 <br />
 <p style="font-size:18px; font-style:italic; font-weight:bold">1. Basic RNN Model</p>
 <br />
