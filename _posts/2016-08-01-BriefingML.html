@@ -180,6 +180,8 @@ $$</p>
 <p>$$ h_{t} = \sigma(W_{hh} h_{t-1} + W_{hx} x_{t}) $$ </p>
 <p>$$ y_{t} = softmax(W_{s} h_{t}) $$ </p>
 <p>where \(W_{hh} \in R_{D_{h} \times R_{D_{h}}}, W_{hx} \in R_{D_{h} \times d} and W_(s) \in R_{|V| \times D_{h}} \)</p>
+<p>The loss function of RNN is:</p>
+<p>J(\theta) = -\frac{1}{T} \sum_{t=1}{T} \sum_{j=1}{|V|} y_{t,j} log y'_{t,j} </p>
 <br />
 <p style="font-size:18px; font-style:italic; font-weight:bold">1. Basic RNN Model</p>
 <br />
