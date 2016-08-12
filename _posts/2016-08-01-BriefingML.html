@@ -183,13 +183,13 @@ $$</p>
 <p>$$ y_{t} = softmax(W_{s} h_{t}) $$ </p>
 <p>where \(W_{hh} \in R_{D_{h} \times R_{D_{h}}}, W_{hx} \in R_{D_{h} \times d} and W_(s) \in R_{|V| \times D_{h}} \)</p>
 <p>The loss function of RNN is:</p>
-<p>J(\theta) = -\frac{1}{T} \sum_{t=1}{T} \sum_{j=1}{|V|} y_{t,j} log y'_{t,j} </p>
+<p>$$J(\theta) = -\frac{1}{T} \sum_{t=1}{T} \sum_{j=1}{|V|} y_{t,j} log y'_{t,j} $$</p>
 <p>A basic RNN suffers the well known gradient vanishing/exploding problem which makes the trainig process pretty hard; refer to <a href="http://cs224d.stanford.edu/lectures/CS224d-Lecture8.pdf">stanford CS224d courser slides</a> for details. Generally, since the same set of weights are used, during back progagation to learn the parameters, the error signal may diminish to none or grow into a huge number that makes the parameters hard to converge. </p>
 
 <br />
 <p style="font-size:18px; font-style:italic; font-weight:bold">2. LSTM & GRU　Cell</p>
 <p>To handle the gradient vanishging/exploding problem, a new type of neural cell is invented:</p>
-<p style="text-align:center"><img src="/collections/imgs/8-lsmt.png" style="width:350px;height:400px;" /></p>
+<p style="text-align:center"><img src="/collections/imgs/8-lstm.png" style="width:350px;height:400px;" /></p>
 <p style="text-align:center; font-style:italic; font-weight:bold">Fig. 8-2 A LSTM cell</p>
 
 <br />
