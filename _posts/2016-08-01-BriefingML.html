@@ -173,8 +173,10 @@ $$</p>
 
 <br />
 <p style="font-size:24px; font-weight:bold">VIII. Recurrent Neural Network</p>
+<br />
+<p style="font-size:18px; font-style:italic; font-weight:bold">1. Basic RNN Model</p>
 <p>Unlike feed forward neural network, a recurrent neural network reuses the same set of parameters per iteration. This allows RNN maintain a dynamic state that suitable for dealing with variable length problems.</p>
-<p style="text-align:center"><img src="/collections/imgs/8-RNN-1.png" style="width:900px;height:400px;" /><img src="/collections/imgs/8-RNN-2.png" style="width:900px;height:400px;" /></p>
+<p style="text-align:center"><img src="/collections/imgs/8-RNN-1.png" style="width:350px;height:400px;" /><img src="/collections/imgs/8-RNN-2.png" style="width:550px;height:400px;" /></p>
 <p style="text-align:center; font-style:italic; font-weight:bold">Fig. 8-1 An illustration of the structure of RNN</p>
 <p>For a single time step, we have:</p>
 <p>$$ h_{t} = \sigma(W_{hh} h_{t-1} + W_{hx} x_{t}) $$ </p>
@@ -185,9 +187,10 @@ $$</p>
 <p>A basic RNN suffers the well known gradient vanishing/exploding problem which makes the trainig process pretty hard; refer to <a href="http://cs224d.stanford.edu/lectures/CS224d-Lecture8.pdf">stanford CS224d courser slides</a> for details. Generally, since the same set of weights are used, during back progagation to learn the parameters, the error signal may diminish to none or grow into a huge number that makes the parameters hard to converge. </p>
 
 <br />
-<p style="font-size:18px; font-style:italic; font-weight:bold">1. Basic RNN Model</p>
-<br />
 <p style="font-size:18px; font-style:italic; font-weight:bold">2. LSTM & GRU　Cell</p>
+<p>To handle the gradient vanishging/exploding problem, a new type of neural cell is invented:</p>
+<p style="text-align:center"><img src="/collections/imgs/8-lsmt.png" style="width:350px;height:400px;" /></p>
+<p style="text-align:center; font-style:italic; font-weight:bold">Fig. 8-2 A LSTM cell</p>
 
 <br />
 <p style="font-size:24px; font-weight:bold">IX. Dynamic Memory Network</p>
@@ -251,7 +254,8 @@ $$ </p>
 
 <br/>
 <p style="font-size:18px; font-style:italic; font-weight:bold">3. Neural Converation Model</p>
-<br/>
+<p style="text-align:center"><img src="/collections/imgs/10-seq2seq.png" style="width:800px;height:300px;" /></p>
+<p style="text-align:center; font-style:italic; font-weight:bold">Fig. 10-1 Illustration of the seq2seq model</p>
 
 
 <br />
