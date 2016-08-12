@@ -189,7 +189,7 @@ $$</p>
 <br />
 <p style="font-size:18px; font-style:italic; font-weight:bold">2. LSTM & GRU　Cell</p>
 <p>To handle the gradient vanishging/exploding problem, a new type of neural cell is invented:</p>
-<p style="text-align:center"><img src="/collections/imgs/8-lstm.png" style="width:350px;height:450px;" /></p>
+<p style="text-align:center"><img src="/collections/imgs/8-lstm.png" style="width:350px;height:500px;" /></p>
 <p style="text-align:center; font-style:italic; font-weight:bold">Fig. 8-2 A LSTM cell</p>
 
 <br />
@@ -261,7 +261,7 @@ Each box in the picture above represents a cell of the RNN, most commonly a GRU 
 <p style="text-align:center"><img src="/collections/imgs/10-en_decoder.png" style="width:500px;height:600px;" /></p>
 <p style="text-align:center; font-style:italic; font-weight:bold">Fig. 10-3 The context passed from encoder to decoder</p>
 <p>In Fig. 10-3, every input has to be encoded into a fixed-size state vector \(C\), as that is the only thing passed to the decoder. To allow the decoder more direct access to the input, an attention mechanism was introduced in Bahdanau.</p>
-<p style="text-align:center"><img src="/collections/imgs/10-attention.png" style="width:500px;height:600px;" /></p>
+<p style="text-align:center"><img src="/collections/imgs/10-attention.png" style="width:500px;height:500px;" /></p>
 <p style="text-align:center; font-style:italic; font-weight:bold">Fig. 10-4 The alignment model of attention mechanism</p>
 </p>
 <p>We can train the seq2seq model end to end using back propagation. If we set the input as a large corpus of questions and the output as corresponding answers, we manage to build a chatbot model which can find a statistically most proper answer to the question being asked. However, we have to admit such dialogue system is far from the level of human converstation, the huge gap inbetween is the system cannot think like human do. To fill the gap, the next step received hot spot is dynamic neural network.</p>
