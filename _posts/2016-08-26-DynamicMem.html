@@ -3,8 +3,15 @@ layout: default
 title: Dynamic Memory Network
 ---
 <h3>1. The model</h3>
-<p>The Dynamic Memory Network(DMN) consists of 4 sub-models: input, output, episodic memory and answer. Before sequencing a sentence into the input model, words are transformed into <a href="https://eddy023.github.io/collections/2016/08/26/WordEmbedding.html">word embeddings</a>. </p>
+<p>The Dynamic Memory Network(DMN) consists of 4 sub-modules: input, question, episodic memory and answer (Fig. 1-1). Before sequencing words of a sentence into the input model, they are transformed into <a href="https://eddy023.github.io/collections/2016/08/26/WordEmbedding.html">word embeddings</a> beforehand. Per sentence, the input model will generate a vector representation which is called fact. All facts will be stored in the episodic memory and get "scanned" through to spot relevent information to given question, using a called "attention mechanism". The scan may take several passes and each pass an "episode" is produced. All episodes are finally "combined" into a answer.</p>
+
+<h3>2. How DMN works</h3>
 <p style="text-align:center"><img src="/collections/imgs/DMN-1-Model.png" style="width:900px;height:400px;" /></p>
-<p style="text-align:center; font-style:italic; font-weight:bold">Fig. 1-1 An example of dynamic memory network</p>
+<p style="text-align:center; font-style:italic; font-weight:bold">Fig. 2-1 An example of dynamic memory network operates</p>
+<p>Fig. 2-1 demonstrates how an question is answered given a list of sentences as context. Firstly, a sentence is transformed into a list of word embeddings, e.g., using Glove [1] (also see <a href="https://eddy023.github.io/collections/2016/08/26/WordEmbedding.html">word embeddings</a>). Embeddings of a sentence is used in the input module to compute \(C_t\) which is the hidden state of the input model or a fact. $$$ C_t = SEQ_MODEL(L[\omega_t^I], h_{t-1}) $$ \(L\) is the embedding matrix. Both GRU or LSTM can be used for the SEQ_MODEL. Since LSTM performs similarly to GRU yet more computational expensive, GRU is preferred. </p>
+In the figure, \(s^{t}\) is the \(t\)th fact in the input module; \(e^{i}\) represents an episode stored in the dynamic memory which would be updated per pass and \(m^{i}\) is the summary of episodes or the hidden state of the \(i\)th pass. </p>
 
+<h3>3. Speculation</h3>
 
+<h3>4. References</h3>
+<p>[1] J. Pennington, R. Socher, and C. D. Manning. Glove: Global vectors for word representation. In EMNLP, 2014.</p>
