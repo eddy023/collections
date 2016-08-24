@@ -2,6 +2,8 @@
 layout: default
 title: Dynamic Memory Network
 ---
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
 <h3>1. The model</h3>
 <p>The Dynamic Memory Network(DMN) consists of 4 sub-modules: input, question, episodic memory and answer (Fig. 1-1). Before sequencing words of a sentence into the input model, they are transformed into <a href="https://eddy023.github.io/collections/2016/08/26/WordEmbedding.html">word embeddings</a> beforehand. Per sentence, the input model will generate a vector representation which is called fact. All facts will be stored in the episodic memory and get "scanned" through to spot relevent information to given question, using a called "attention mechanism". The scan may take several passes and each pass an "episode" is produced. All episodes are finally "combined" into a answer.</p>
 <p style="text-align:center"><img src="/collections/imgs/DMN-1-Model.png" style="width:900px;height:400px;" /></p>
