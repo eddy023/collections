@@ -6,32 +6,32 @@ title: Tensorflow
 
 <h3>2. An Example</h3>
 <p style="color:red">import tensorflow as tf</p>
-<p>#Create an session</p>
+<p>Create an session</p>
 <p style="color:red">sess = tf.InteractiveSession()</p>
-<p>#Create holders for input and output, holder is a class to represent data of unknown dimension before trainning</p>
+<p>Create holders for input and output, holder is a class to represent data of unknown dimension before trainning</p>
 <p style="color:red">x = tf.placeholder(tf.float32, shape=[None, 784])</p>
 <p style="color:red">y_ = tf.placeholder(tf.float32, shape=[None, 10])</p>
-<p>#Create variables for parameters, dimension of paramters is decided by the graph of a network, so it's initially known</p>
+<p>Create variables for parameters, dimension of paramters is decided by the graph of a network, so it's initially known</p>
 <p style="color:red">W = tf.Variable(tf.zeros([784,10]))</p>
 <p style="color:red">b = tf.Variable(tf.zeros([10]))</p>
-<p>#Variables should be initiated before used in session</p>
+<p>Variables should be initiated before used in session</p>
 <p style="color:red">sess.run(tf.initialize_all_variables())</p>
-<p>#The regression model, "tf.matmul(x,W) + b" produces a k-demension vector (dimension of the output) and the softmax outputed them in a probability form</p>
+<p>The regression model, "tf.matmul(x,W) + b" produces a k-demension vector (dimension of the output) and the softmax outputed them in a probability form</p>
 <p style="color:red">y = tf.nn.softmax(tf.matmul(x,W) + b)</p>
-<p>#Cross entropy evaluates the likehood between "y" and the label "y_", which is the cost function in fact</p>
+<p>Cross entropy evaluates the likehood between "y" and the label "y_", which is the cost function in fact</p>
 <p style="color:red">cross_entropy = tf.reduce_mean(-tf.reduce_sum(y_ * tf.log(y), reduction_indices=[1]))</p>
-<p>#Use gradient descent to minimize the cross entropy</p>
+<p>Use gradient descent to minimize the cross entropy</p>
 <p style="color:red">train_step = tf.train.GradientDescentOptimizer(0.5).minimize(cross_entropy)</p>
 
 <h3>3. Tensorflow Components</h3>
 <h4>3.1. Graph</h4>
-<p>A "Graph" contains a set of ["Operation"](../../api_docs/python/framework.md#Operation) objects, which represent units of computation; and ["Tensor"](../../api_docs/python/framework.md#Tensor) objects, which represent the units of data that flow between operations. A default "Graph" is always registered, and accessible by calling ["tf.get_default_graph()"](../../api_docs/python/framework.md#get_default_graph). To add an operation to the default graph, simply call one of the functions that defines a new "Operation":
+<p>A "Graph" contains a set of ["Operation"](../../api_docs/python/framework.md#Operation) objects, which represent units of computation; and ["Tensor"](../../api_docs/python/framework.md#Tensor) objects, which represent the units of data that flow between operations. A default "Graph" is always registered, and accessible by calling ["tf.get_default_graph()"](../../api_docs/python/framework.md#get_default_graph). To add an operation to the default graph, simply call one of the functions that defines a new "Operation", e.g.:
 <p style="color:red">c = tf.constant(4.0)</p>
 <p style="color:red">assert c.graph is tf.get_default_graph()</p>
 <p>Another typical usage involves the ["Graph.as_default()"](../../api_docs/python/framework.md#Graph.as_default) context manager, which overrides the current default graph for the lifetime of the context:
 <p style="color:red">g = tf.Graph()</p>
 <p style="color:red">with g.as_default():</p>
-<p># Define operations and tensors in "g"</p>
+<p>Define operations and tensors in "g"</p>
 <p style="color:red">  c = tf.constant(30.0)</p>
 <p style="color:red">  assert c.graph is g</p>
 <p>Important note: Graph class *is not* thread-safe for graph construction. All operations should be created from a single thread, or external synchronization must be provided. Unless otherwise specified, all methods are not thread-safe.</p>
@@ -47,6 +47,6 @@ title: Tensorflow
 <p style="color:red">  c = tf.constant([[1.0, 2.0], [3.0, 4.0]])</p>
 <p style="color:red">  d = tf.constant([[1.0, 1.0], [0.0, 1.0]])</p>
 <p style="color:red">  e = tf.matmul(c, d)</p>
-<p style="color:red"></p>
+<p>Check the construction function of class tensor, we can see a tensor would maintain a reference to an operation. </p>
 <p style="color:red"></p>
 <p style="color:red"></p>
