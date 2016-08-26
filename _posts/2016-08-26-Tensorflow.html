@@ -1,0 +1,36 @@
+---
+layout: default
+title: Tensorflow
+---
+<h3>1. Introduction</h3>
+
+<h3>2. An Example</h3>
+<p>import tensorflow as tf</p>
+<p style="font-style:italic">#Create an session</p>
+<p>sess = tf.InteractiveSession()</p>
+<p style="font-style:italic">#Create holders for input and output, holder is a class to represent data of unknown dimension before trainning</p>
+<p>x = tf.placeholder(tf.float32, shape=[None, 784])</p>
+<p>y_ = tf.placeholder(tf.float32, shape=[None, 10])</p>
+<p style="font-style:italic">#Create variables for parameters, dimension of paramters is decided by the graph of a network, so it's initially known</p>
+<p>W = tf.Variable(tf.zeros([784,10]))</p>
+<p>b = tf.Variable(tf.zeros([10]))</p>
+<p style="font-style:italic">#Variables should be initiated before used in session</p>
+<p>sess.run(tf.initialize_all_variables())</p>
+<p style="font-style:italic">#The regression model, "tf.matmul(x,W) + b" produces a k-demension vector (dimension of the output) and the softmax outputed them in a probability form</p>
+<p>y = tf.nn.softmax(tf.matmul(x,W) + b)</p>
+<p style="font-style:italic">#Cross entropy evaluates the likehood between "y" and the label "y_", which is the cost function in fact</p>
+<p>cross_entropy = tf.reduce_mean(-tf.reduce_sum(y_ * tf.log(y), reduction_indices=[1]))</p>
+<p style="font-style:italic">#Use gradient descent to minimize the cross entropy</p>
+<p>train_step = tf.train.GradientDescentOptimizer(0.5).minimize(cross_entropy)</p>
+<p style="font-style:italic">#We can see a train_step is an operation (tensor) which keeps an inner reference to cross_entropy; cross_entropy again represents operations on y_ and y which is a tensor for softmax operation. This is how operations are embeded sequentially and lastly get executed in a session.</p>
+<p style="font-style:italic">#A "Tensor" is a symbolic handle to one of the outputs of an 'Operation'. It does not hold the values of that operation's output, but instead provides a means of computing those values in a TensorFlow [`Session`](../../api_docs/python/client.md#Session). The tensor class has two primary purposes:</p>
+<p style="font-style:italic">  1. A `Tensor` can be passed as an input to another `Operation`. This builds a dataflow connection between operations, which enables TensorFlow to execute an entire `Graph` that represents a large, multi-step computation.</p>
+<p style="font-style:italic">  2. After the graph has been launched in a session, the value of the "Tensor" can be computed by passing it to [`Session.run()`](../../api_docs/python/client.md#Session.run). "t.eval()" is a shortcut for calling "tf.get_default_session().run(t)".</p>
+<p style="font-style:italic">  In the following example, "c", "d", and "e" are symbolic "Tensor" objects, whereas "result" is a numpy array that stores a concrete value:
+<p style="font-style:italic">  Build a dataflow graph:</p>
+<p style="font-style:italic">  c = tf.constant([[1.0, 2.0], [3.0, 4.0]])</p>
+<p style="font-style:italic">  d = tf.constant([[1.0, 1.0], [0.0, 1.0]])</p>
+<p style="font-style:italic">  e = tf.matmul(c, d)</p>
+<p></p>
+<p></p>
+<p></p>
