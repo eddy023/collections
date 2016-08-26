@@ -22,15 +22,31 @@ title: Tensorflow
 <p style="color:red">cross_entropy = tf.reduce_mean(-tf.reduce_sum(y_ * tf.log(y), reduction_indices=[1]))</p>
 <p>#Use gradient descent to minimize the cross entropy</p>
 <p style="color:red">train_step = tf.train.GradientDescentOptimizer(0.5).minimize(cross_entropy)</p>
-<p>#We can see a train_step is an operation (tensor) which keeps an inner reference to cross_entropy; cross_entropy again represents operations on y_ and y which is a tensor for softmax operation. This is how operations are embeded sequentially and lastly get executed in a session.</p>
-<p>#A "Tensor" is a symbolic handle to one of the outputs of an 'Operation'. It does not hold the values of that operation's output, but instead provides a means of computing those values in a TensorFlow [`Session`](../../api_docs/python/client.md#Session). The tensor class has two primary purposes:</p>
-<p>  1. A `Tensor` can be passed as an input to another `Operation`. This builds a dataflow connection between operations, which enables TensorFlow to execute an entire `Graph` that represents a large, multi-step computation.</p>
-<p>  2. After the graph has been launched in a session, the value of the "Tensor" can be computed by passing it to [`Session.run()`](../../api_docs/python/client.md#Session.run). "t.eval()" is a shortcut for calling "tf.get_default_session().run(t)".</p>
+
+<h3>3. Tensorflow Components</h3>
+<h4>3.1. Graph</h4>
+<p>A "Graph" contains a set of ["Operation"](../../api_docs/python/framework.md#Operation) objects, which represent units of computation; and ["Tensor"](../../api_docs/python/framework.md#Tensor) objects, which represent the units of data that flow between operations. A default "Graph" is always registered, and accessible by calling ["tf.get_default_graph()"](../../api_docs/python/framework.md#get_default_graph). To add an operation to the default graph, simply call one of the functions that defines a new "Operation":
+<p style="color:red">c = tf.constant(4.0)</p>
+<p style="color:red">assert c.graph is tf.get_default_graph()</p>
+<p>Another typical usage involves the ["Graph.as_default()"](../../api_docs/python/framework.md#Graph.as_default) context manager, which overrides the current default graph for the lifetime of the context:
+<p style="color:red">g = tf.Graph()</p>
+<p style="color:red">with g.as_default():</p>
+<p># Define operations and tensors in "g"</p>
+<p style="color:red">  c = tf.constant(30.0)</p>
+<p style="color:red">  assert c.graph is g</p>
+<p>Important note: Graph class *is not* thread-safe for graph construction. All operations should be created from a single thread, or external synchronization must be provided. Unless otherwise specified, all methods are not thread-safe.</p>
+<p>A "Graph" instance supports an arbitrary number of "collections" that are identified by name. For convenience when building a large graph, collections can store groups of related objects: for example, the "tf.Variable" uses a collection (named ["tf.GraphKeys.VARIABLES"](../../api_docs/python/framework.md#GraphKeys)) for all variables that are created during the construction of a graph. The caller may define additional collections by specifying a new name.<p>
+<h4>3.2. Operation</h4>
+<p>An "Operation" is a node in a TensorFlow "Graph" that takes zero or more "Tensor" objects as input, and produces zero or more "Tensor" objects as output. Objects of type "Operation" are created by calling a Python op constructor (such as ["tf.matmul()"](../../api_docs/python/math_ops.md#matmul)) or ["Graph.create_op()"](../../api_docs/python/framework.md#Graph.create_op). For example "c = tf.matmul(a, b)" creates an "Operation" of type "MatMul" that takes tensors "a" and "b" as input, and produces "c" as output. After the graph has been launched in a session, an "Operation" can be executed by passing it to ["Session.run()"](../../api_docs/python/client.md#Session.run). "op.run()" is a shortcut for calling "tf.get_default_session().run(op)".
+<h4>3.3. Tensor</h4>
+<p>#A "Tensor" is a symbolic handle to one of the outputs of an 'Operation'. It does not hold the values of that operation's output, but instead provides a means of computing those values in a TensorFlow ["Session"](../../api_docs/python/client.md#Session). The tensor class has two primary purposes:</p>
+<p>  1. A "Tensor" can be passed as an input to another "Operation". This builds a dataflow connection between operations, which enables TensorFlow to execute an entire "Graph" that represents a large, multi-step computation.</p>
+<p>  2. After the graph has been launched in a session, the value of the "Tensor" can be computed by passing it to ["Session.run()"](../../api_docs/python/client.md#Session.run). "t.eval()" is a shortcut for calling "tf.get_default_session().run(t)".</p>
 <p>  In the following example, "c", "d", and "e" are symbolic "Tensor" objects, whereas "result" is a numpy array that stores a concrete value:
 <p>  Build a dataflow graph:</p>
-<p>  c = tf.constant([[1.0, 2.0], [3.0, 4.0]])</p>
-<p>  d = tf.constant([[1.0, 1.0], [0.0, 1.0]])</p>
-<p>  e = tf.matmul(c, d)</p>
+<p style="color:red">  c = tf.constant([[1.0, 2.0], [3.0, 4.0]])</p>
+<p style="color:red">  d = tf.constant([[1.0, 1.0], [0.0, 1.0]])</p>
+<p style="color:red">  e = tf.matmul(c, d)</p>
 <p style="color:red"></p>
 <p style="color:red"></p>
 <p style="color:red"></p>
