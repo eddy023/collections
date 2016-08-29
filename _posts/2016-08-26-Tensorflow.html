@@ -52,17 +52,19 @@ title: Tensorflow
 <p style="color:red"></p>
 
 <h3>4. Mechanism</h3>
-<p>Describing a model with tensorflow, it's always based on a graph, no matter the default one or newly created one. With a graph, planceholders, variables and operations created will be attach to it and given to the C++ kernel to actually calculate the result. A example is given below to show a graph strcuture. After we run a few lines of code, we print the content of a graph.</p>
-<p style="color:red">import tensorflow as tf</p>
-<p style="color:red">sess = tf.InteractiveSession()</p>
-<p style="color:red">x = tf.placeholder(tf.float32, shape=[None, 784])</p>
-<p style="color:red">y_ = tf.placeholder(tf.float32, shape=[None, 10])</p>
-<p style="color:red">W = tf.Variable(tf.zeros([784,10]))</p>
-<p style="color:red">b = tf.Variable(tf.zeros([10]))</p>
-<p style="color:red">y = tf.nn.softmax(tf.matmul(x,W) + b)</p>
-<p style="color:red">for i in tf.get_default_graph().get_operations():</p>
-<p style="color:red">    print(i)</p>
-<textarea style="color:green" rows="506" cols="40">
+<p>Describing a model with tensorflow, it's always based on a graph, no matter the default one or newly created one. With a graph, planceholders, variables and operations created will be attach to it and given to the C++ kernel to actually performing the trainning or prediction. A example is given below to show a graph strcuture. After we run a few lines of code, we print the content of a graph.</p>
+<textarea style="color:red" rows="10" cols="40">
+import tensorflow as tf
+sess = tf.InteractiveSession()
+x = tf.placeholder(tf.float32, shape=[None, 784])
+y_ = tf.placeholder(tf.float32, shape=[None, 10])
+W = tf.Variable(tf.zeros([784,10]))
+b = tf.Variable(tf.zeros([10]))
+y = tf.nn.softmax(tf.matmul(x,W) + b)
+for i in tf.get_default_graph().get_operations():
+    print(i)
+</textarea>
+<textarea style="color:green" rows="508" cols="40">
 name: "Placeholder"
 op: "Placeholder"
 attr {
