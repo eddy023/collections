@@ -62,7 +62,7 @@ title: Tensorflow
 <p style="color:red">y = tf.nn.softmax(tf.matmul(x,W) + b)</p>
 <p style="color:red">for i in tf.get_default_graph().get_operations():</p>
 <p style="color:red">    print(i)</p>
-<textarea style="color:green" rows="510" cols="40">
+<textarea style="color:green" rows="506" cols="40">
 name: "Placeholder"
 op: "Placeholder"
 attr {
@@ -570,4 +570,5 @@ attr {
   }
 }
 </textarea>
+<p>We can see a graph use a 4-tuple (i.e. name, op, input, and attr) structure to describe an entity. The name is automatically given based on the op which is the name of a variable, placeholder or operation. The input is the name of another entity. The attr provides the information of entity attributions, e.g., data dimension, value, and value type. An entity may contain several inputs or attrs.</p>
 
