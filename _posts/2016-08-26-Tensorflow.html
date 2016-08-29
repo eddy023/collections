@@ -62,164 +62,159 @@ title: Tensorflow
 <p style="color:red">y = tf.nn.softmax(tf.matmul(x,W) + b)</p>
 <p style="color:red">for i in tf.get_default_graph().get_operations():</p>
 <p style="color:red">    print(i)</p>
-<p style="color:green"></p>
-<p style="color:green"></p>
-<p style="color:green"></p>
-<p style="color:green">name: "Placeholder"</p>
-<p style="color:green">op: "Placeholder"</p>
-<p style="color:green">attr {</p>
-<p style="color:green">  key: "dtype"</p>
-<p style="color:green">  value {</p>
-<p style="color:green">    type: DT_FLOAT</p>
-<p style="color:green">  }</p>
-<p style="color:green">}</p>
-<p style="color:green">attr {</p>
-<p style="color:green">  key: "shape"</p>
-<p style="color:green">  value {</p>
-<p style="color:green">    shape {</p>
-<p style="color:green">    }</p>
-<p style="color:green">  }</p>
-<p style="color:green">}</p>
+<textarea style="color:green" rows="510" cols="40">
+name: "Placeholder"
+op: "Placeholder"
+attr {
+  key: "dtype"
+  value {
+    type: DT_FLOAT
+  }
+}
+attr {
+  key: "shape"
+  value {
+    shape {
+    }
+  }
+}
 
-<p style="color:green">name: "Placeholder_1"</p>
-<p style="color:green">op: "Placeholder"</p>
-<p style="color:green">attr {</p>
-<p style="color:green">  key: "dtype"</p>
-<p style="color:green">  value {</p>
-<p style="color:green">    type: DT_FLOAT</p>
-<p style="color:green">  }</p>
-<p style="color:green">}</p>
-<p style="color:green">attr {</p>
-<p style="color:green">  key: "shape"</p>
-<p style="color:green">  value {</p>
-<p style="color:green">    shape {</p>
-<p style="color:green">    }</p>
-<p style="color:green">  }</p>
-<p style="color:green">}</p>
+name: "Placeholder_1"
+op: "Placeholder"
+attr {
+  key: "dtype"
+  value {
+    type: DT_FLOAT
+  }
+}
+attr {
+  key: "shape"
+  value {
+    shape {
+    }
+  }
+}
 
-<p style="color:green">name: "zeros"</p>
-<p style="color:green">op: "Const"</p>
-<p style="color:green">attr {</p>
-<p style="color:green">  key: "dtype"</p>
-<p style="color:green">  value {</p>
-<p style="color:green">    type: DT_FLOAT</p>
-<p style="color:green">  }</p>
-<p style="color:green">}</p>
-<p style="color:green">attr {</p>
-<p style="color:green">  key: "value"</p>
-<p style="color:green">  value {</p>
-<p style="color:green">    tensor {</p>
-<p style="color:green">      dtype: DT_FLOAT</p>
-<p style="color:green">      tensor_shape {</p>
-<p style="color:green">        dim {</p>
-<p style="color:green">          size: 784</p>
-<p style="color:green">        }</p>
-<p style="color:green">        dim {</p>
-<p style="color:green">          size: 10</p>
-<p style="color:green">        }</p>
-<p style="color:green">      }</p>
-<p style="color:green">      float_val: 0.0</p>
-<p style="color:green">    }</p>
-<p style="color:green">  }</p>
-<p style="color:green">}</p>
+name: "zeros"
+op: "Const"
+attr {
+  key: "dtype"
+  value {
+    type: DT_FLOAT
+  }
+}
+attr {
+  key: "value"
+  value {
+    tensor {
+      dtype: DT_FLOAT
+      tensor_shape {
+        dim {
+          size: 784
+        }
+        dim {
+          size: 10
+        }
+      }
+      float_val: 0.0
+    }
+  }
+}
 
-<p style="color:green">name: "Variable"</p>
-<p style="color:green">op: "Variable"</p>
-<p style="color:green">attr {</p>
-<p style="color:green">  key: "container"</p>
-<p style="color:green">  value {</p>
-<p style="color:green">    s: ""</p>
-<p style="color:green">  }</p>
-<p style="color:green">}</p>
-<p style="color:green">attr {</p>
-<p style="color:green">  key: "dtype"</p>
-<p style="color:green">  value {</p>
-<p style="color:green">    type: DT_FLOAT</p>
-<p style="color:green">  }</p>
-<p style="color:green">}</p>
-<p style="color:green">attr {</p>
-<p style="color:green">  key: "shape"</p>
-<p style="color:green">  value {</p>
-<p style="color:green">    shape {</p>
-<p style="color:green">      dim {</p>
-<p style="color:green">        size: 784</p>
-<p style="color:green">      }</p>
-<p style="color:green">      dim {</p>
-<p style="color:green">        size: 10</p>
-<p style="color:green">      }</p>
-<p style="color:green">    }</p>
-<p style="color:green">  }</p>
-<p style="color:green">}</p>
-<p style="color:green">attr {</p>
-<p style="color:green">  key: "shared_name"</p>
-<p style="color:green">  value {</p>
-<p style="color:green">    s: ""</p>
-<p style="color:green">  }</p>
-<p style="color:green">}</p>
+name: "Variable"
+op: "Variable"
+attr {
+  key: "container"
+  value {
+    s: ""
+  }
+}
+attr {
+  key: "dtype"
+  value {
+    type: DT_FLOAT
+  }
+}
+attr {
+  key: "shape"
+  value {
+    shape {
+      dim {
+        size: 784
+      }
+      dim {
+        size: 10
+      }
+    }
+  }
+}
+attr {
+  key: "shared_name"
+  value {
+    s: ""
+  }
+}
 
-<p style="color:green">name: "Variable/Assign"</p>
-<p style="color:green">op: "Assign"</p>
-<p style="color:green">input: "Variable"</p>
-<p style="color:green">input: "zeros"</p>
-<p style="color:green">attr {</p>
-<p style="color:green">  key: "T"</p>
-<p style="color:green">  value {</p>
-<p style="color:green">    type: DT_FLOAT</p>
-<p style="color:green">  }</p>
-<p style="color:green">}</p>
-<p style="color:green">attr {</p>
-<p style="color:green">  key: "_class"</p>
-<p style="color:green">  value {</p>
-<p style="color:green">    list {</p>
-<p style="color:green">      s: "loc:@Variable"</p>
-<p style="color:green">    }</p>
-<p style="color:green">  }</p>
-<p style="color:green">}</p>
-<p style="color:green">attr {</p>
-<p style="color:green">  key: "use_locking"</p>
-<p style="color:green">  value {</p>
-<p style="color:green">    b: true</p>
-<p style="color:green">  }</p>
-<p style="color:green">}</p>
-<p style="color:green">attr {</p>
-<p style="color:green">  key: "validate_shape"</p>
-<p style="color:green">  value {</p>
-<p style="color:green">    b: true</p>
-<p style="color:green">  }</p>
-<p style="color:green">}</p>
+name: "Variable/Assign"
+op: "Assign"
+input: "Variable"
+input: "zeros"
+attr {
+  key: "T"
+  value {
+    type: DT_FLOAT
+  }
+}
+attr {
+  key: "_class"
+  value {
+    list {
+      s: "loc:@Variable"
+    }
+  }
+}
+attr {
+  key: "use_locking"
+  value {
+    b: true
+  }
+}
+attr {
+  key: "validate_shape"
+  value {
+    b: true
+  }
+}
 
-<p style="color:green">name: "Variable/read"</p>
-<p style="color:green">op: "Identity"</p>
-<p style="color:green">input: "Variable"</p>
-<p style="color:green">attr {</p>
-<p style="color:green">  key: "T"</p>
-<p style="color:green">  value {</p>
-<p style="color:green">    type: DT_FLOAT</p>
-<p style="color:green">  }</p>
-<p style="color:green">}</p>
-<p style="color:green">attr {</p>
-<p style="color:green">  key: "_class"</p>
-<p style="color:green">  value {</p>
-<p style="color:green">    list {</p>
-<p style="color:green">      s: "loc:@Variable"</p>
-<p style="color:green">    }</p>
-<p style="color:green">  }</p>
-<p style="color:green">}</p>
+name: "Variable/read"
+op: "Identity"
+input: "Variable"
+attr {
+  key: "T"
+  value {
+    type: DT_FLOAT
+  }
+}
+attr {
+  key: "_class"
+  value {
+    list {
+      s: "loc:@Variable"
+    }
+  }
+}
 
-<p style="color:green">name: "zeros_1"</p>
-<p style="color:green">op: "Const"</p>
-<p style="color:green">attr {</p>
-<p style="color:green">  key: "dtype"</p>
-<p style="color:green">  value {</p>
-<p style="color:green">    type: DT_FLOAT</p>
-<p style="color:green">  }</p>
-<p style="color:green">}</p>
-<p style="color:green">attr {</p>
-<p style="color:green">  key: "value"</p>
-<p style="color:green">  value {</p>
-
-<textarea>
-
+name: "zeros_1"
+op: "Const"
+attr {
+  key: "dtype"
+  value {
+    type: DT_FLOAT
+  }
+}
+attr {
+  key: "value"
+  value {
     tensor {
       dtype: DT_FLOAT
       tensor_shape {
