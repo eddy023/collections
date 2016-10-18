@@ -3,21 +3,20 @@ layout: default
 title: Crawler by Scrapy-redis and anti-crawl settings
 ---
 <h3>1 Installation</h3>
-<p>Install scrapy: 
-<br>  sudo pip3 install scrapy</p>
-<p>Install redis: 
-<br>  sudo apt-get install redis-server</p>
+<p>Install scrapy: </p>
+<p style="color:red">sudo pip3 install scrapy</p>
+<p>Install redis:</p>
+<p style="color:red">sudo apt-get install redis-server</p>
 <p>Start redis server in the terminal: 
-<br>  redis-server</p>
-<p>Start a client: 
-<br>  redis-cli</p>
-<p>Useful commands of redis:
-<br>  keys *     // query all keys
-<br>  type [key] // query the structure type of the corresponding key
-<br>  flushdb    // clear all records
-<br>  llen [key] // check record number of a given key stored using list structure; normally data are stored with list
-  
-</p>
+<p style="color:red">redis-server</p>
+<p>Start a client:</p>
+<p style="color:red">redis-cli</p>
+<p>Useful commands of redis:</p>
+<p style="color:red">keys *     // query all keys</p>
+<p style="color:red">type [key] // query the structure type of the corresponding key</p>
+<p style="color:red">flushdb    // clear all records</p>
+<p style="color:red">llen [key] // check record number of a given key stored using list structure; normally data are stored with list</p>
+
 <p>Connect to a remote redis-server: redis-cli -h [ip] -p [port]
 <br>For distributed crawling, a machine should first start a client connecting to the remote redis server and then to start scrapying pages.
 </p>
