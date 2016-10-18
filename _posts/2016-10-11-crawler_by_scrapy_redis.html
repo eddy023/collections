@@ -1,0 +1,26 @@
+---
+layout: default
+title: Crawler by Scrapy-redis and anti-crawl settings
+---
+<h3>1 Installation</h3>
+<p>Install scrapy: sudo pip3 install scrapy</p>
+<p>Install redis: sudo apt-get install redis-server</p>
+<p>Start redis server in the terminal: redis-server</p>
+<p>Start a client: redis-cli</p>
+<p>Useful commands of redis:
+<br>  keys *     // query all keys
+<br>  type [key] // query the structure type of the corresponding key
+<br>  flushdb    // clear all records
+<br>  llen [key] // check record number of a given key stored using list structure; normally data are stored with list
+  
+</p>
+<p>Connect to a remote redis-server: redis-cli -h [ip] -p [port]
+<br>For distributed crawling, a machine should first start a client connecting to the remote redis server and then to start scrapying pages.
+</p>
+<p>ps, I use ubuntu 16.04 and python 3.5.</p>
+<p></p>
+
+<p>添加随机user-agent
+https://www.urlteam.org/2016/07/scrapy%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E5%85%AB-%E5%8F%8D%E5%8F%8D%E7%88%AC%E8%99%AB%E6%8A%80%E6%9C%AF%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/</p>
+<p>登录
+http://www.jianshu.com/p/b7f41df6202d</p>
