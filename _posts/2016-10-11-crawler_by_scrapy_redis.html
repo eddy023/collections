@@ -2,7 +2,7 @@
 layout: default
 title: Crawler by Scrapy-redis and anti-crawl settings
 ---
-<h3>1 Installation</h3>
+<h3>1 Installation and Commands</h3>
 <p>Install scrapy: </p>
 <p style="color:red">sudo pip3 install scrapy</p>
 <p>Install redis:</p>
@@ -15,13 +15,97 @@ title: Crawler by Scrapy-redis and anti-crawl settings
 <p style="color:red">keys *       // query all keys</p>
 <p style="color:red">type [key]   // query the structure type of the corresponding key</p>
 <p style="color:red">flushdb      // clear all records</p>
-<p style="color:red">llen [key]   // check record number of a given key stored using list structure; normally data are stored with list</p>
-<p>Connect to a remote redis-server: redis-cli -h [ip] -p [port]
-<br>For distributed crawling, a pc should first start a client connecting to the remote redis server and then to start scrapying pages.
-</p>
+<p style="color:red">llen [key]   // check record number of a given key stored using list structure; normally data are 
+  stored with list</p>
+<p>Connect to a remote redis-server: redis-cli -h [ip] -p [port]</p>
+<p>For distributed crawling, a pc should first start a client connecting to the remote redis server and then to start 
+  scrapying pages.</p>
 <p>ps, I use ubuntu 16.04 and python 3.5.</p>
-<p></p>
 
+<h3>2 Architecture and Code</h3>
+<p>Fig. 2-1 depicts the architecture of scrapy redis, among all components, we commonly only need to write some code 
+  within "spiders", "middleware" and "pipeline". </p>
+<p style="text-align:center"><img src="/collections/imgs/10-11-crawler-scrapy-redis.png" style="width:400px;height:300px;" /></p>
+<p style="text-align:center; font-style:italic">Fig. 2-1 Architecture of Scrapy-redis</p>
+<textarea style="color:red" rows="10" cols="80">
+# @ZhihuSpider.py
+import re
+from scrapy_redis.spiders import RedisSpider
+from scrapy.linkextractors import LinkExtractor
+from scrapy.spiders import CrawlSpider, Rule
+from lxml import etree
+from scrapy.selector import Selector
+
+class zhihuSpider(CrawlSpider):
+    name = 'ZhihuSpider'
+    allowed_domains = ['https://www.zhihu.com', 'https://www.zhihu.com', 'www.zhihu.com']
+    start_urls = ['https://www.zhihu.com/question/50526563#answer-44787525']
+    
+    rules = [
+        Rule(LinkExtractor(), callback='parse_directory', follow=True),
+    ] 
+
+    xsrf = None
+
+    def parse_directory(self, response):
+        if not (re.match("https://www.zhihu.com/question", response.url) or re.match("http://www.zhihu.com/question", response.url)):
+            return
+        tree = etree.HTML(response.body)
+        r = tree.xpath("//div[contains(@class,'zm-editable-content')]/text() | //span[contains(@class,'zm-editable-content')]/text()")
+        #print(r)
+        return {'records': r}
+</textarea>
+<p>Above code gives an example of spider to  scrapy "www.zhihu.com". The architecture will request "start_urls" and call "parse_directory"
+with response. The return value of "parse_directory" will be stored into redis with the form defined in "items.py". If a website requires
+login to access, the function "start_requests" needs to be defined:</p>
+<textarea style="color:red" rows="10" cols="80">
+   #defined within class ZhihuSpider
+      def start_requests(self):
+        return [sp.Request("https://www.zhihu.com/#signin", meta = {'cookiejar' : 1, 'dont_redirect': True}, callback = self.request_captcha)]
+</textarea>
+<p>The callback function "self.request_captcha" is to request the captcha picture as verification code.</p>
+<textarea style="color:red" rows="10" cols="80">
+   def request_captcha(self, response):
+        self.xsrf = Selector(response).xpath('//input[@name="_xsrf"]/@value').extract()[0]
+        captcha_url = "http://www.zhihu.com/captcha.gif?r=" + str(int(time.time() * 1000)) + "&type=login"
+        yield Request(
+            url=captcha_url,
+            headers=self.headers_dict,
+            meta={
+                "cookiejar": response.meta["cookiejar"],
+                "X-Xsrftoken": self.xsrf
+            },
+            callback=self.download_captcha)
+  def download_captcha(self, response):
+        with open("captcha.gif", "wb") as fp:
+            fp.write(response.body)
+        os.system('xdg-open captcha.gif')
+        print("请输入验证码:\n")
+        captcha = input()
+        return sp.FormRequest(
+            url="https://www.zhihu.com/login/phone_num",
+            headers=self.headers_dict,
+            formdata={
+                "phone_number": "",
+                "password": "",
+                "X-Xsrftoken": self.xsrf,
+                "remember_me": "true",
+                "captcha": captcha
+            },
+            meta={
+                "cookiejar": response.meta["cookiejar"],
+                'dont_redirect': True,
+            },
+            callback=self.after_login)
+</textarea>
+<p>The callback function of "request_captcha" will download captcha picture and prompt the user to input the code and send login 
+request. The "after_login" function direct the architecture to start scrapy with "start_urls".</p>
+<textarea style="color:red" rows="10" cols="80">
+  def after_login(self, response) :
+        for url in self.start_urls :
+            yield self.make_requests_from_url(url)
+</textarea>
+<h3>3 Anti-anti-crawl Methods</h3>
 <p>添加随机user-agent</p>
 <p>https://www.urlteam.org/2016/07/scrapy%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E5%85%AB-%E5%8F%8D%E5%8F%8D%E7%88%AC%E8%99%AB%E6%8A%80%E6%9C%AF%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/</p>
 <p>登录</p>
