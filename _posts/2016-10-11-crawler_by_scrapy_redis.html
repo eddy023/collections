@@ -58,7 +58,7 @@ class zhihuSpider(CrawlSpider):
 <p>Above code gives an example of spider to  scrapy "www.zhihu.com". The architecture will request "start_urls" and call "parse_directory"
 with response. The return value of "parse_directory" will be stored into redis with the form defined in "items.py". If a website requires
 login to access, the function "start_requests" needs to be defined:</p>
-<textarea style="color:red" rows="10" cols="80">
+<textarea style="color:red" rows="4" cols="80">
    #defined within class ZhihuSpider
       def start_requests(self):
         return [sp.Request("https://www.zhihu.com/#signin", meta = {'cookiejar' : 1, 'dont_redirect': True}, callback = self.request_captcha)]
@@ -100,11 +100,103 @@ login to access, the function "start_requests" needs to be defined:</p>
 </textarea>
 <p>The callback function of "request_captcha" will download captcha picture and prompt the user to input the code and send login 
 request. The "after_login" function direct the architecture to start scrapy with "start_urls".</p>
-<textarea style="color:red" rows="10" cols="80">
+<textarea style="color:red" rows="4" cols="80">
   def after_login(self, response) :
         for url in self.start_urls :
             yield self.make_requests_from_url(url)
 </textarea>
+<p>"Process_items.py" reads scrapied data from redis and write it into a file. </p>
+<textarea style="color:red" rows="10" cols="80">
+#@process_items.py
+from __future__ import print_function, unicode_literals
+
+import argparse
+import json
+import logging
+import pprint
+import sys
+import time
+from scrapy_redis import get_redis
+
+logger = logging.getLogger('process_items')
+
+def process_items(r, keys, timeout, limit=0, log_every=1000, wait=.1):
+    with open('records.txt', 'w') as f:
+      limit = limit or float('inf')
+      processed = 0
+      while processed < limit:
+        # Change ``blpop`` to ``brpop`` to process as LIFO.
+        ret = r.blpop(keys, timeout)
+        # If data is found before the timeout then we consider we are done.
+        if ret is None:
+            time.sleep(wait)
+            continue
+        source, data = ret
+        try:
+        # The data is serialized into bytes that needs to be decoded into str for json to load
+            data = data.decode()
+            item = json.loads(data)
+        except Exception:
+            logger.exception("Failed to load item:\n%r", pprint.pformat(data))
+            continue
+        try:
+            records = item.get('records')
+            print(records)
+            for i in records:
+                f.write(i)
+            f.write("**a post end mark**\n")
+        except KeyError:
+            logger.exception("[%s] Failed to process item:\n%r", source, pprint.pformat(item))
+            continue
+        processed += 1
+        if processed % log_every == 0:
+            logger.info("Processed %s items", processed)
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('key', help="Redis key where items are stored")
+    parser.add_argument('--host')
+    parser.add_argument('--port')
+    parser.add_argument('--timeout', type=int, default=5)
+    parser.add_argument('--limit', type=int, default=0)
+    parser.add_argument('--progress-every', type=int, default=100)
+    parser.add_argument('-v', '--verbose', action='store_true')
+
+    args = parser.parse_args()
+
+    params = {}
+    if args.host:
+        params['host'] = args.host
+    if args.port:
+        params['port'] = args.port
+
+    logging.basicConfig(level=logging.DEBUG if args.verbose else logging.INFO)
+
+    r = get_redis(**params)
+    host = r.connection_pool.get_connection('info').host
+    logger.info("Waiting for items in '%s' (server: %s)", args.key, host)
+    kwargs = {
+        'keys': [args.key],
+        'timeout': args.timeout,
+        'limit': args.limit,
+        'log_every': args.progress_every,
+    }
+    try:
+        process_items(r, **kwargs)
+        retcode = 0  # ok
+    except KeyboardInterrupt:
+        retcode = 0  # ok
+    except Exception:
+        logger.exception("Unhandled exception")
+        retcode = 2
+
+    return retcode
+
+if __name__ == '__main__':
+    sys.exit(main())
+</textarea>
+
 <h3>3 Anti-anti-crawl Methods</h3>
 <p>添加随机user-agent</p>
 <p>https://www.urlteam.org/2016/07/scrapy%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E5%85%AB-%E5%8F%8D%E5%8F%8D%E7%88%AC%E8%99%AB%E6%8A%80%E6%9C%AF%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/</p>
