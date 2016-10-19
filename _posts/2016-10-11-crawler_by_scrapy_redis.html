@@ -196,6 +196,100 @@ def main():
 if __name__ == '__main__':
     sys.exit(main())
 </textarea>
+  
+<p>"pipeline.py" adds more content to the scrapied data, e.g., spider name, crawled time.</p>
+<textarea style="color:red" rows="10" cols="80">
+# @pipeline.py
+from datetime import datetime
+
+class ZhihuPipeline(object):
+    def process_item(self, item, spider):
+        item["crawled"] = datetime.utcnow()
+        item["spider"] = spider.name
+        return item
+</textarea>
+
+<p>"items.py" defines the structure of scraped data to store in the redis.</p>
+<textarea style="color:red" rows="10" cols="80">
+# @items.py
+from scrapy.item import Item, Field
+class ZhihuItem(Item):
+    records = Field()
+    crawled = Field()
+    spider = Field()
+    url = Field()
+</textarea>
+
+<p>"settings.py" is the configuration file, the content is self-explained.</p>
+<textarea style="color:red" rows="10" cols="80">
+# @settings.py
+SPIDER_MODULES = ['myproject.spiders']
+NEWSPIDER_MODULE = 'myproject.spiders'
+
+USER_AGENT = 'scrapy-redis (+https://github.com/rolando/scrapy-redis)'
+
+DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
+SCHEDULER = "scrapy_redis.scheduler.Scheduler"
+#SCHEDULER_PERSIST = True
+#SCHEDULER_QUEUE_CLASS = "scrapy_redis.queue.SpiderPriorityQueue"
+#SCHEDULER_QUEUE_CLASS = "scrapy_redis.queue.SpiderQueue"
+#SCHEDULER_QUEUE_CLASS = "scrapy_redis.queue.SpiderStack"
+
+SCHEDULER_IDLE_BEFORE_CLOSE = 10
+
+ITEM_PIPELINES = {
+    #'example.pipelines.ExamplePipeline': 300,
+    #'scrapy_redis.pipelines.RedisPipeline': 400,
+    'myproject.pipelines.ZhihuPipeline':300,
+    'scrapy_redis.pipelines.RedisPipeline': 400,
+}
+
+#REDIS_HOST = 'localhost'
+#REDIS_PORT = 6379
+
+LOG_LEVEL = 'DEBUG'
+
+# Introduce an artifical delay to make use of parallelism. to speed up the
+# crawl.
+DOWNLOAD_DELAY = 0.2
+
+COOKIES_ENABLES=False
+
+#disable default useragent and use a new useragent  
+DOWNLOADER_MIDDLEWARES = {  
+        'scrapy.contrib.downloadermiddleware.useragent.UserAgentMiddleware' : None,  
+        'myproject.middlewares.RotateUserAgentMiddleware' : 400,
+        #'myproject.middlewares.ProxyMiddleware': 100, #代理需要用到
+    }
+
+PROXIES = [
+  {'ip_port': '111.11.228.75:80', 'user_pass': ''},
+  {'ip_port': '120.198.243.22:80', 'user_pass': ''},
+  {'ip_port': '111.8.60.9:8123', 'user_pass': ''},
+  #{'ip_port': '101.71.27.120:80', 'user_pass': ''},
+  {'ip_port': '122.96.59.104:80', 'user_pass': ''},
+  {'ip_port': '122.224.249.122:8088', 'user_pass': ''},
+  {'ip_port': '211.153.17.151:80', 'user_pass': ''},
+  {'ip_port': '202.105.179.164:3128', 'user_pass': ''},
+  {'ip_port': '202.107.238.51:3128', 'user_pass': ''},
+  {'ip_port': '218.90.174.167:3128', 'user_pass': ''},
+  {'ip_port': '14.29.124.52:80', 'user_pass': ''},
+  {'ip_port': '112.112.70.116:80', 'user_pass': ''},
+  {'ip_port': '61.132.241.103:808', 'user_pass': ''},
+  {'ip_port': '123.125.122.203:80', 'user_pass': ''},
+  {'ip_port': '123.125.122.205:80', 'user_pass': ''},
+  {'ip_port': '123.125.122.224:80', 'user_pass': ''},
+  {'ip_port': '123.125.122.204:80', 'user_pass': ''},
+  {'ip_port': '115.28.101.22:3128', 'user_pass': ''},
+  {'ip_port': '112.112.70.118:80', 'user_pass': ''},
+  {'ip_port': '122.72.33.138:80', 'user_pass': ''},
+  {'ip_port': '14.29.124.51:80', 'user_pass': ''},
+  {'ip_port': '114.215.150.13:3128', 'user_pass': ''},
+  {'ip_port': '113.107.112.210:8101', 'user_pass': ''},
+  {'ip_port': '112.112.70.115:80', 'user_pass': ''},
+  {'ip_port': '14.29.124.53:80', 'user_pass': ''},
+  {'ip_port': '59.34.2.93:3128', 'user_pass': ''},
+</textarea>
 
 <h3>3 Anti-anti-crawl Methods</h3>
 <p>添加随机user-agent</p>
