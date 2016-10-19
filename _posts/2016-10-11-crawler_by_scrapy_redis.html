@@ -100,7 +100,7 @@ login to access, the function "start_requests" needs to be defined:</p>
 </textarea>
 <p>The callback function of "request_captcha" will download captcha picture and prompt the user to input the code and send login 
 request. The "after_login" function direct the architecture to start scrapy with "start_urls".</p>
-<textarea style="color:red" rows="4" cols="80">
+<textarea style="color:red" rows="3" cols="80">
   def after_login(self, response) :
         for url in self.start_urls :
             yield self.make_requests_from_url(url)
@@ -198,7 +198,7 @@ if __name__ == '__main__':
 </textarea>
   
 <p>"pipeline.py" adds more content to the scrapied data, e.g., spider name, crawled time.</p>
-<textarea style="color:red" rows="10" cols="80">
+<textarea style="color:red" rows="8" cols="80">
 # @pipeline.py
 from datetime import datetime
 
