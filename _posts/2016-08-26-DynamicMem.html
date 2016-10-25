@@ -31,7 +31,7 @@ title: Dynamic Memory Network
   \(L\) is the embedding matrix. Both GRU or LSTM can be used, since LSTM performs similarly to GRU yet more computational 
   expensive, GRU is preferred. </p>
 <p>Secondly, the question module employs a GRU to generate a question representation as well:
-  $$ q_t = GRU(L[\w_t^Q], q_{t-1}) $$ 
+  $$ q_t = GRU(L[w_t^Q], q_{t-1}) $$ 
   $$ q = q_{T_Q} $$ </p>
 <p>Thirdly, in the episodic memory module, attention mechanism is applied to generate episode \(e\). The memory \(m\) 
   is initiated with \(q\), the questioin represetation, and the formula to calculate \(e\) is:
