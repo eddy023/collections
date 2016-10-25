@@ -24,8 +24,8 @@ title: Dynamic Memory Network
   Word embeddings is then input into a RNN to generate setentce representations. Specificially, given a set of sentences, a 
   special "End of Sentence" symbol is added at the end of each sentence. After certain iterations of running the RNN when 
   the input is a "End of Sentence" symbol, the hidden state of the RNN is recorded and used as the representation of that 
-  sentence. In this way, every sentence is assigned a representation. Each represetation is call a fact and \(C_t\) correpresonds
-  to the \(t\)th fact:
+  sentence. In this way, every sentence is assigned a representation. Each represetation is called a fact and \(C_t\) 
+  correpresonds to the \(t\)-th fact:
   $$ C_t = SEQ\_MODEL(L[\omega_t^I], h_{t-1}) $$ 
   \(L\) is the embedding matrix. Both GRU or LSTM can be used for the SEQ_MODEL. Since LSTM performs similarly to GRU 
   yet more computational expensive, GRU is preferred. </p>
