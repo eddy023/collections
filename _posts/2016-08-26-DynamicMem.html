@@ -19,33 +19,39 @@ title: Dynamic Memory Network
 <h3>2. How DMN works</h3>
 <p style="text-align:center"><img src="/collections/imgs/DMN-1-Example.png" style="width:900px;height:400px;" /></p>
 <p style="text-align:center; font-style:italic; font-weight:bold">Fig. 2-1 An example of dynamic memory network operates</p>
-<p>Fig. 2-1 demonstrates how the dynaminc memory network works to provide the answer to a question. Firstly, a sentence is transformed 
-  into a list of word embeddings, e.g., using Glove [1] (also see <a href="https://eddy023.github.io/collections/2016/08/26/WordEmbedding.html">word embeddings</a>). 
-  Word embeddings is then inputted into a RNN to generate setentce representations. Specificially, given a set of sentences, a 
-  special "End of Sentence" symbol is added at the end of each sentence. After certain iterations of running the forward process
-  of the RNN, if the input becomes a "End of Sentence" symbol, the hidden state of the RNN is recorded and deemed as the
-  representation of that sentence. Such represetation is called fact and \(C_t\) correpresonds to the \(t\)-th fact:
-  $$ C_t = SEQ\_MODEL(L[\omega_t^I], h_{t-1}) $$ 
-  \(L\) is the embedding matrix. Both GRU or LSTM can be used for the SEQ_MODEL (RNN). Since LSTM performs similarly to GRU 
-  yet more computational expensive, GRU is preferred. </p>
-<p>In Fig. 2-1, the \(s^{t}\) is actually \(C_t\); \(m^{i}\) represents the episodic memory initiated by \(q\) which the last hidden state
-  of the question RNN. </p>
-  $$ m^i = GRU(e^i, m^{i-1}) $$ 
-<p>\(e^{i}\) is the episode of the i-th pass running the attention mechanism. For each pass, the attention mechanism performs 
-  \(T_c\) iterations of RNN (per on each input fact) and lastly outputs \(e^{i}\). \(e^{i}\) then participates in caculcating
-  \(m^i\) which again helps to generate \(e^{i+1}\). In this way, facts are reasoned in multiple pass till find the answer. 
-  Below are formulas to generate \(e^{i}\): </p>
+<p>Fig. 2-1 demonstrates how the dynaminc memory network works to provide the answer to a question. Firstly, a sentence is 
+  transformed into a list of word embeddings, e.g., using Glove [1] 
+  (also see <a href="https://eddy023.github.io/collections/2016/08/26/WordEmbedding.html">word embeddings</a>). 
+  Word embeddings is then inputted into a gated recurrent network (GRU) to generate sentence representations. In specific, 
+  given a set of sentences (e.g., \(s_1\), \(s_2\), ..., \(s_8\)), a "End of Sentence" token is added at the end of each sentence. These sentences are inputted into
+  the GRU a word per iteration. After serveral iterations when the input word is a token, the hidden state of the GRU is 
+  deemed as the sentence　representation, and the output of the GRU is recorded as a fact \(c_1\). In this patter, the input model 
+  generates \(c_2\), \(c_3\), ..., \(c_T\).　In math, above procedures can be summaried as:
+  $$ C_t = GRU(L[\omega_t^I], h_{t-1}) $$ 
+  \(L\) is the embedding matrix. Both GRU or LSTM can be used, since LSTM performs similarly to GRU yet more computational 
+  expensive, GRU is preferred. </p>
+<p>Secondly, the question module employs a GRU to generate a question representation as well:
+  $$ q_t = GRU(L[\w_t^Q], q_{t-1}) $$ 
+  $$ q = q_{T_Q} $$ </p>
+<p>Thirdly, in the episodic memory module, attention mechanism is applied to generate episode \(e\). The memory \(m\) 
+  is initiated with \(q\), the questioin represetation, and the formula to calculate \(e\) is:
   $$
   \begin{align}
   g^i_t &= G(c_t, m^{i-1}, q) \\
         &= \omega(w^{(2)}tanh(w^{(1)}z(c_t, m^{i-q}, q) + b^{(1)}) + b^{(2)})
   \end{align}
   $$
-  $$ z(c, m, q) = [ c, m, q, c ◦ q, c ◦ m, |c − q|, |c − m|, c^T W^{(b)} q, c^T W^{(b)} m ] $$
-<p>As can be seen, \(G\) is in fact a two-layer feed forward network. Its input is the feature vector \(z(c, m, q)\) which 
+  <p>As can be seen, \(G\) is in fact a two-layer feed forward network. Its input is the feature vector \(z(c, m, q)\) which 
 consists of a variety of similarities. \(g^i_t\) is used as weight to update the memory of GRU:</p>
-$$ h^i_t = g^i_t GRU(c_t, h^i_{t-1}) + (1 - g^i_t) h^i_{t-1}$$
-$$ e^i = h^t_{T_c}$$
+  $$ z(c, m, q) = [ c, m, q, c ◦ q, c ◦ m, |c − q|, |c − m|, c^T W^{(b)} q, c^T W^{(b)} m ] $$
+  \(g^i_t\) is used as weight to calculate the hidden state of the GRU.
+  $$ h^i_t = g^i_t GRU(c_t, h^i_{t-1}) + (1 - g^i_t) h^i_{t-1}$$
+  $$ e^i = h^t_{T_c}$$
+  \(e^i\) is the episode for the i-th pass. To calcuate next path, \(e^i\) is used to update the memory:
+  $$ m^i = GRU(e^i, m^{i-1}) $$ 
+  For each pass, the attention mechanism performs \(T_c\) iterations of RNN (per on each input fact) and lastly outputs 
+  \(e^{i}\). \(e^{i}\) then participates in caculcating \(m^i\) which again helps to generate \(e^{i+1}\). In this way, 
+  facts are reasoned in multiple pass till find the answer. 
 
 <h3>3. Speculation</h3>
 
