@@ -28,7 +28,7 @@ title: Dynamic Memory Network
   $$ C_t = SEQ\_MODEL(L[\omega_t^I], h_{t-1}) $$ 
   \(L\) is the embedding matrix. Both GRU or LSTM can be used for the SEQ_MODEL (RNN). Since LSTM performs similarly to GRU 
   yet more computational expensive, GRU is preferred. </p>
-<p>In Fig. 2-1, \(s^{t}\) is actually \(C_t\); \(m^{i}\) represents the episodic memory initiated by \(q\) which the last hidden state
+<p>In Fig. 2-1, the \(s^{t}\) is actually \(C_t\); \(m^{i}\) represents the episodic memory initiated by \(q\) which the last hidden state
   of the question RNN. </p>
   $$ m^i = GRU(e^i, m^{i-1}) $$ 
 <p>\(e^{i}\) is the episode of the i-th pass running the attention mechanism. For each pass, the attention mechanism performs 
