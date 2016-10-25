@@ -6,15 +6,48 @@ title: Dynamic Memory Network
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 <h3>1. The model</h3>
-<p>The Dynamic Memory Network(DMN) consists of 4 sub-modules: input, question, episodic memory and answer (Fig. 1-1). Before sequencing words of a sentence into the input model, they are transformed into <a href="https://eddy023.github.io/collections/2016/08/26/WordEmbedding.html">word embeddings</a> beforehand. Per sentence, the input model will generate a vector representation which is called fact. All facts will be stored in the episodic memory and get "scanned" through to spot relevent information to given question, using a called "attention mechanism". The scan may take several passes and each pass an "episode" is produced. All episodes are finally "combined" into a answer.</p>
+<p>The Dynamic Memory Network(DMN) consists of 4 sub-modules: input, question, episodic memory and answer (Fig. 1-1). 
+  Before sequencing words of a sentence into the input model, they are transformed into 
+  <a href="https://eddy023.github.io/collections/2016/08/26/WordEmbedding.html">word embeddings</a> 
+  beforehand. Per sentence, the input model will generate a vector representation which is called fact. 
+  All facts will be stored in the episodic memory and get "scanned" through to spot relevent information to given question, 
+  using a called "attention mechanism". The scan may take several passes and each pass an "episode" is produced. All episodes
+  are finally "combined" into a answer.</p>
 <p style="text-align:center"><img src="/collections/imgs/DMN-1-Model.png" style="width:900px;height:400px;" /></p>
 <p style="text-align:center; font-style:italic; font-weight:bold">Fig. 1-1 An example of dynamic memory network operates</p>
 
 <h3>2. How DMN works</h3>
 <p style="text-align:center"><img src="/collections/imgs/DMN-1-Example.png" style="width:900px;height:400px;" /></p>
 <p style="text-align:center; font-style:italic; font-weight:bold">Fig. 2-1 An example of dynamic memory network operates</p>
-<p>Fig. 2-1 demonstrates how an question is answered given a list of sentences as context. Firstly, a sentence is transformed into a list of word embeddings, e.g., using Glove [1] (also see <a href="https://eddy023.github.io/collections/2016/08/26/WordEmbedding.html">word embeddings</a>). Embeddings of a sentence is used in the input module to compute \(C_t\) which is the hidden state of the input model or a fact. $$ C_t = SEQ_MODEL(L[\omega_t^I], h_{t-1}) $$ \(L\) is the embedding matrix. Both GRU or LSTM can be used for the SEQ_MODEL. Since LSTM performs similarly to GRU yet more computational expensive, GRU is preferred. </p>
-In the figure, \(s^{t}\) is the \(t\)th fact in the input module; \(e^{i}\) represents an episode stored in the dynamic memory which would be updated per pass and \(m^{i}\) is the summary of episodes or the hidden state of the \(i\)th pass. </p>
+<p>Fig. 2-1 demonstrates how the dynaminc memory network works to provide the answer to a question. Firstly, a sentence is transformed 
+  into a list of word embeddings, e.g., using Glove [1] (also see <a href="https://eddy023.github.io/collections/2016/08/26/WordEmbedding.html">word embeddings</a>). 
+  Word embeddings is then input into a RNN to generate setentce representations. Specificially, given a set of sentences, a 
+  special "End of Sentence" symbol is added at the end of each sentence. After certain iterations of running the RNN when 
+  the input is a "End of Sentence" symbol, the hidden state of the RNN is recorded and used as the representation of that 
+  sentence. In this way, every sentence is assigned a representation. Each represetation is call a fact and \(C_t\) correpresonds
+  to the \(t\)th fact:
+  $$ C_t = SEQ_MODEL(L[\omega_t^I], h_{t-1}) $$ 
+  \(L\) is the embedding matrix. Both GRU or LSTM can be used for the SEQ_MODEL. Since LSTM performs similarly to GRU 
+  yet more computational expensive, GRU is preferred. </p>
+<p>In Fig. 2-1, \(s^{t}\) is actually \(C_t\); \(m^{i}\) represents the episodic memory initiated by \(q\) which the last hidden state
+  of the question RNN. </p>
+  $$ m^i = GRU(e^i, m^{i-1}) $$ 
+<p>\(e^{i}\) is the episode of the i-th pass running the attention machnims. For each pass, the attention machnism performs 
+  \(T_c\) iterations of RNN (per on each input fact) and lastly outputs \(e^{i}\). \(e^{i}\) then participates in caculcating
+  \(m^i\) which again helps to generate \(e^{i+1}\). In this way, facts are reasoned in multiple pass till find the answer. 
+  Below are formulas to generate \(e^{i}\): </p>
+  $$ g^i_t = G(c_t, m^{i-1}, q) $$ 
+  $$
+  \begin{align}
+  g^i_t &= \left[G(c_t, m^{i-1}, q) \right] \\
+        &= \left[\omega(w^{(2)}tanh(w^{(1)}z(c_t, m^{i-q}, q) + b^{(1)}) + b^{(2)}) \right]
+  \end{align}
+  $$
+  $$ z(c, m, q) = [ c, m, q, c ◦ q, c ◦ m, |c − q|, |c − m|, c^T W^{(b)} q, c^T W^{(b)} m ] $$
+<p>As can be seen, \(G\) is in fact a two-layer feed forward network. Its input is the feature vector \(z(c, m, q)\) which 
+consists of a variety of similarities. \(g^i_t\) is used as weight to update the memory of GRU:</p>
+$$ h^i_t = g^i_t GRU(c_t, h^i_{t-1}) + (1 - g^i_t) h^i_{t-1}$$
+$$ e^i = h^t_{T_c}$$
 
 <h3>3. Speculation</h3>
 
