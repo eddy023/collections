@@ -26,7 +26,7 @@ title: Dynamic Memory Network
   the input is a "End of Sentence" symbol, the hidden state of the RNN is recorded and used as the representation of that 
   sentence. In this way, every sentence is assigned a representation. Each represetation is call a fact and \(C_t\) correpresonds
   to the \(t\)th fact:
-  $$ C_t = SEQ_MODEL(L[\omega_t^I], h_{t-1}) $$ 
+  $$ C_t = SEQ\_MODEL(L[\omega_t^I], h_{t-1}) $$ 
   \(L\) is the embedding matrix. Both GRU or LSTM can be used for the SEQ_MODEL. Since LSTM performs similarly to GRU 
   yet more computational expensive, GRU is preferred. </p>
 <p>In Fig. 2-1, \(s^{t}\) is actually \(C_t\); \(m^{i}\) represents the episodic memory initiated by \(q\) which the last hidden state
