@@ -32,7 +32,7 @@ title: Dynamic Memory Network
 <p>In Fig. 2-1, \(s^{t}\) is actually \(C_t\); \(m^{i}\) represents the episodic memory initiated by \(q\) which the last hidden state
   of the question RNN. </p>
   $$ m^i = GRU(e^i, m^{i-1}) $$ 
-<p>\(e^{i}\) is the episode of the i-th pass running the attention machnims. For each pass, the attention machnism performs 
+<p>\(e^{i}\) is the episode of the i-th pass running the attention mechanism. For each pass, the attention mechanism performs 
   \(T_c\) iterations of RNN (per on each input fact) and lastly outputs \(e^{i}\). \(e^{i}\) then participates in caculcating
   \(m^i\) which again helps to generate \(e^{i+1}\). In this way, facts are reasoned in multiple pass till find the answer. 
   Below are formulas to generate \(e^{i}\): </p>
