@@ -34,24 +34,24 @@ title: Dynamic Memory Network
   $$ q_t = GRU(L[w_t^Q], q_{t-1}) $$ 
   $$ q = q_{T_Q} $$ </p>
 <p>Thirdly, in the episodic memory module, attention mechanism is applied to generate episode \(e\). The memory \(m\) 
-  is initiated with \(q\), the questioin represetation, and the formula to calculate \(e\) is:
+  is initiated with the questioin represetation \(q\), and the formula to calculate \(e\) is:
+  $$ h^i_t = g^i_t GRU(c_t, h^i_{t-1}) + (1 - g^i_t) h^i_{t-1}$$
+  $$ e^i = h^t_{T_c}$$
+  \(g^i_t\) is the weight and calculated as:
   $$
   \begin{align}
   g^i_t &= G(c_t, m^{i-1}, q) \\
         &= \omega(w^{(2)}tanh(w^{(1)}z(c_t, m^{i-q}, q) + b^{(1)}) + b^{(2)})
   \end{align}
   $$
-  <p>As can be seen, \(G\) is in fact a two-layer feed forward network. Its input is the feature vector \(z(c, m, q)\) which 
-consists of a variety of similarities. \(g^i_t\) is used as weight to update the memory of GRU:</p>
+  \(G\) is in fact a two-layer feed forward network. \(z(c, m, q)\) is the feature vector which consists of a variety 
+  of similarities:
   $$ z(c, m, q) = [ c, m, q, c ◦ q, c ◦ m, |c − q|, |c − m|, c^T W^{(b)} q, c^T W^{(b)} m ] $$
-  \(g^i_t\) is used as weight to calculate the hidden state of the GRU.
-  $$ h^i_t = g^i_t GRU(c_t, h^i_{t-1}) + (1 - g^i_t) h^i_{t-1}$$
-  $$ e^i = h^t_{T_c}$$
-  \(e^i\) is the episode for the i-th pass. To calcuate next path, \(e^i\) is used to update the memory:
-  $$ m^i = GRU(e^i, m^{i-1}) $$ 
   For each pass, the attention mechanism performs \(T_c\) iterations of RNN (per on each input fact) and lastly outputs 
-  \(e^{i}\). \(e^{i}\) then participates in caculcating \(m^i\) which again helps to generate \(e^{i+1}\). In this way, 
-  facts are reasoned in multiple pass till find the answer. 
+  \(e^{i}\). \(e^{i}\) then participates in caculcating \(m^i\):
+  $$ m^i = GRU(e^i, m^{i-1}) $$ 
+  \(m^i\) again helps to generate \(e^{i+1}\). In this way, facts are reasoned in multiple pass till find the answer. 
+</p>
 
 <h3>3. Speculation</h3>
 
