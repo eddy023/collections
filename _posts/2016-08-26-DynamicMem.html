@@ -41,7 +41,7 @@ title: Dynamic Memory Network
   is initiated with the questioin represetation \(q\), and the formula to calculate \(e\) is:
   $$ h^i_t = g^i_t GRU(c_t, h^i_{t-1}) + (1 - g^i_t) h^i_{t-1}$$
   $$ e^i = h^t_{T_c}$$
-  \(g^i_t\) is the weight and calculated as:
+  \(h^i_t\) is the hidden state of the GRU; \(g^i_t\) is the weight and calculated as:
   $$
   \begin{align}
   g^i_t &= G(c_t, m^{i-1}, q) \\
