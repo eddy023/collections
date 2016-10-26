@@ -20,7 +20,7 @@ title: Dynamic Memory Network
 <p style="text-align:center"><img src="/collections/imgs/DMN-1-Example.png" style="width:900px;height:400px;" /></p>
 <p style="text-align:center; font-style:italic; font-weight:bold">Fig. 2-1 An example of workflow of dynamic memory network</p>
 <p>Fig. 2-1 demonstrates how the dynaminc memory network works to answer a question in 4 steps. </p>
-<p>1, at the beginning, transform input sentences into word embeddings, e.g., using Glove [1] 
+<p>(1), at the beginning, transform input sentences into word embeddings, e.g., using Glove [1] 
   (also see <a href="https://eddy023.github.io/collections/2016/08/26/WordEmbedding.html">word embeddings</a>). 
   Word embeddings is then passed to a gated recurrent network (GRU) to generate sentence representations. More specifically, 
   given sets of word embeddings of sentences (e.g., \(s_1\), \(s_2\), ..., \(s_8\); \(s_i\) is a list of word embeddings 
@@ -32,10 +32,10 @@ title: Dynamic Memory Network
   $$ C_t = GRU(L[\omega_t^I], h_{t-1}) $$ 
   \(L\) is the embedding matrix. Both GRU or LSTM can be used, since LSTM performs similarly to GRU yet more computational 
   expensive, GRU is preferred. </p>
-<p>2, the question module employs a GRU to generate a question representation as well:
+<p>(2), the question module employs a GRU to generate a question representation as well:
   $$ q_t = GRU(L[w_t^Q], q_{t-1}) $$ 
   $$ q = q_{T_Q} $$ </p>
-<p>3, in the episodic memory module, attention mechanism is applied to generate episode \(e\). The episodic memory \(m\) 
+<p>(3), in the episodic memory module, attention mechanism is applied to generate episode \(e\). The episodic memory \(m\) 
   is initiated with the questioin represetation \(q\), and the formula to calculate \(e\) is:
   $$ h^i_t = g^i_t GRU(c_t, h^i_{t-1}) + (1 - g^i_t) h^i_{t-1}$$
   $$ e^i = h^t_{T_c}$$
@@ -54,7 +54,7 @@ title: Dynamic Memory Network
   $$ m^i = GRU(e^i, m^{i-1}) $$ 
   \(m^i\) again helps to generate \(e^{i+1}\). In this way, facts are reasoned in multiple pass till find the answer. 
 </p>
-<p>4, \(e^i\) is passed to the answer module.
+<p>(4), \(e^i\) is passed to the answer module.
 </p>
 <h3>3. Speculation</h3>
 
