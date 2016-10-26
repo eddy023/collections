@@ -18,7 +18,7 @@ title: Dynamic Memory Network
 
 <h3>2. How DMN works</h3>
 <p style="text-align:center"><img src="/collections/imgs/DMN-1-Example.png" style="width:900px;height:400px;" /></p>
-<p style="text-align:center; font-style:italic; font-weight:bold">Fig. 2-1 An example of dynamic memory network operates</p>
+<p style="text-align:center; font-style:italic; font-weight:bold">Fig. 2-1 An example of workflow of dynamic memory network</p>
 <p>Fig. 2-1 demonstrates how the dynaminc memory network works to answer a question in 4 steps. </p>
 <p>1, at the beginning, transform input sentences into word embeddings, e.g., using Glove [1] 
   (also see <a href="https://eddy023.github.io/collections/2016/08/26/WordEmbedding.html">word embeddings</a>). 
@@ -35,7 +35,7 @@ title: Dynamic Memory Network
 <p>2, the question module employs a GRU to generate a question representation as well:
   $$ q_t = GRU(L[w_t^Q], q_{t-1}) $$ 
   $$ q = q_{T_Q} $$ </p>
-<p>3, in the episodic memory module, attention mechanism is applied to generate episode \(e\). The memory \(m\) 
+<p>3, in the episodic memory module, attention mechanism is applied to generate episode \(e\). The episodic memory \(m\) 
   is initiated with the questioin represetation \(q\), and the formula to calculate \(e\) is:
   $$ h^i_t = g^i_t GRU(c_t, h^i_{t-1}) + (1 - g^i_t) h^i_{t-1}$$
   $$ e^i = h^t_{T_c}$$
