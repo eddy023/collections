@@ -42,7 +42,7 @@ title: Dynamic Memory Network
   <p style="text-align:center"><img src="/collections/imgs/DMN-weight-g.png" style="width:800px;height:300px;" /></p>
   <p style="text-align:center; font-style:italic; font-weight:bold">Fig. 2-2 Original GRU v.s. Modified GRU</p>
   <br>
-  <p> The Update gate is replaced by a new gate \(g\) operation and the formula to calculate \(e\) becomes:
+  <p> The Update gate is replaced by a new gate operation \(g\) and the formula to calculate \(e\) becomes:
   $$ h^i_t = g^i_t GRU(c_t, h^i_{t-1}) + (1 - g^i_t) h^i_{t-1}$$
   $$ e^i = h^t_{T_c}$$
   \(h^i_t\) is the hidden state of the GRU; \(g^i_t\) is the weight and calculated as:
