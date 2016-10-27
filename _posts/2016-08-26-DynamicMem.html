@@ -43,7 +43,7 @@ title: Dynamic Memory Network
   <p style="text-align:center; font-style:italic; font-weight:bold">Fig. 2-2 Original GRU v.s. Modified GRU</p>
   <br>
   <p> The Update gate is replaced by a new gate operation \(g\) and the formula to calculate \(e\) becomes:
-  $$ h^i_t = g^i_t \cdot \hat \sim h_t + (1 - g^i_t) \cdot h^i_{t-1}$$
+  $$ h^i_t = g^i_t \cdot \hat \quad h_t + (1 - g^i_t) \cdot h^i_{t-1}$$
   $$ e^i = h^t_{T_c} $$
   \(h^i_t\) is the hidden state of the GRU; the update gate \(g^i_t\) is used as weight and calculated as:
   $$
