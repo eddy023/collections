@@ -64,6 +64,10 @@ title: Dynamic Memory Network
 <p>(4) \(e^i\) is passed to the answer module.
 </p>
 <h3>3. Speculation</h3>
+<p>The idea of attention mechanism is to pair two (or) elements and assign a set of parameters to map them into a 
+total "score". Parameters will be adjust and learnt in the end-to-end learning process of the entire module to maximize
+the value of the score. After the learning process, a pair with higher score is deemed as with closer connection. When
+applying the module, new pairs with highers will contribute more weights to the module and help improve predictions.</p>
 
 <h3>4. References</h3>
 <p>[1] J. Pennington, R. Socher, and C. D. Manning. Glove: Global vectors for word representation. In EMNLP, 2014.</p>
