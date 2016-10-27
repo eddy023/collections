@@ -47,7 +47,7 @@ shows the structure of a GRU.</p>
 $$ r = \sigma (W^r x_t + U^r h_{t-1}) $$
 $$ z = \sigma (W^z x_t + U^z h_{t-1}) $$
 $$ h'_t = \sigma (W x_t + U ( R \cdot h_{t-1}) $$
-$$ h_t = z \cdot h_{t-1} + (1 - z) h'_t $$
+$$ h_t = z \cdot h_{t-1} + (1 - z) \cdot h'_t $$
 <h3>9. References</h3>
 <p>Sampled softmax: http://120.52.73.75/arxiv.org/pdf/1412.2007v2.pdf</p>
 <p>RNN BackPropgation Through Time: http://ir.hit.edu.cn/~jguo/docs/notes/bptt.pdf</p>
