@@ -59,7 +59,8 @@ title: Dynamic Memory Network
   \(e^{i}\). \(e^{i}\) then participates in caculcating \(m^i\) which is intiated by q:
   $$ m^i = GRU(e^i, m^{i-1}) $$
   $$ m^0 = q $$ 
-  \(m^i\) again helps to generate \(e^{i+1}\). In this way, facts are reasoned in multiple pass till find the answer. 
+  \(m^i\) again helps to generate \(e^{i+1}\). In this way, facts are reasoned in multiple pass till find the answer. Note
+  that the attention mechanism and update of episodic memory use two different GRUs.  
 </p>
 
 <p>(4) \(e^i\) is passed to the answer module.
