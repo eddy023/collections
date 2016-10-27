@@ -15,7 +15,7 @@ title: Recurrent Neural Network
 <h3>6. Deep RNN</h3>
 
 <h3>7. RNN with LSTM</h3>
-<p>　＂One of the appeals of RNNs is the idea that they might be able to connect previous information to the present task, 
+<p>"One of the appeals of RNNs is the idea that they might be able to connect previous information to the present task, 
   such as using previous video frames might inform the understanding of the present frame. If RNNs could do this, they’d 
   be extremely useful. But can they? It depends.　Sometimes, we only need to look at recent information to perform the 
   present task. For example, consider a language model trying to predict the next word based on the previous ones. If we 
@@ -29,13 +29,23 @@ title: Recurrent Neural Network
   In theory, RNNs are absolutely capable of handling such “long-term dependencies.” A human could carefully pick parameters
   for them to solve toy problems of this form. Sadly, in practice, RNNs don’t seem to be able to learn them. The problem was
   explored in depth by Hochreiter (1991) [German] and <a href="http://www-dsi.ing.unifi.it/~paolo/ps/tnn-94-gradient.pdf">
-  Bengio, et al. (1994)</a>, who found some pretty fundamental reasons why it might be difficult.＂</p>
-<p>-- cited from <a href＝"https://colah.github.io/posts/2015-08-Understanding-LSTMs/">"Understanding LSTM Networks"</a></p>
+  Bengio, et al. (1994)</a>, who found some pretty fundamental reasons why it might be difficult."</p>
+<p>-- cited from <a href＝"https://colah.github.io/posts/2015-08-Understanding-LSTMs/">"Understanding LSTM Networks"</a> all
+content of this section can refer to the artcile as well.</p>
 <p>
 </p>
 
 <h3>8. RNN with GRU</h3>
-
+<p>GRU is a simplied version of LSTM but requires less computation resource, thus is employed for most projects. Fig. 8-1
+shows the structure of a GRU.</p>
+<p style="text-align:center"><img src="/collections/imgs/DMN-weight-g.png" style="width:400px;height:300px;" /></p>
+<p style="text-align:center; font-style:italic; font-weight:bold">Fig. 8-1 Structure of GRU</p>
+<p>GRU employs a reset gate \(r\) to control the generation of new hidden state \(h'_t\) (temporal) and a update gate \(z\) 
+  to control the generation of hidden state \(h'_t\):</p>
+$$ r = \sigma (W^r x_t + U^r h_{t-1}) $$
+$$ z = \sigma (W^z x_t + U^z h_{t-1}) $$
+$$ h'_t = \sigma (W x_t + U ( R \cdot h_{t-1}) $$
+$$ h_t = z \cdot h_{t-1} + (1 - z) h'_t $$
 <h3>9. References</h3>
 <p>Sampled softmax: http://120.52.73.75/arxiv.org/pdf/1412.2007v2.pdf</p>
 <p>RNN BackPropgation Through Time: http://ir.hit.edu.cn/~jguo/docs/notes/bptt.pdf</p>
