@@ -59,11 +59,17 @@ title: Dynamic Memory Network
   \(e^{i}\). \(e^{i}\) then participates in caculcating \(m^i\) which is intiated by q:
   $$ m^i = GRU(e^i, m^{i-1}) $$
   $$ m^0 = q $$ 
-  \(m^i\) again helps to generate \(e^{i+1}\). In this way, facts are reasoned in multiple pass till find the answer. Note
-  that the attention mechanism and update of episodic memory use two different GRUs.  
+  \(m^i\) again helps to generate \(e^{i+1}\). In this way, facts are reasoned in multiple pass till reaching the ending
+  signal or a fixed pass limitation. Note that the attention mechanism and update of episodic memory use two different GRUs.  
 </p>
 
-<p>(4) \(e^i\) is passed to the answer module.
+<p>(4) \(m^{T_m}\) is passed to the answer module to initial an GRU. 
+  $$ a^0 = m^{T_m} $$
+  $$ y^t = softmax(W^{(a)} a_t) $$ 
+  $$ a^t = GRU([y_{t-1}, q], a_{t-1}) $$ 
+  The last generated word y_{t-1} is concatenated with q as the input for next iteration, this is to provide language model
+  information and question context information. Relevent backgroud knowledge is attended as carried in \(m^{T_m}\) playing
+  as the hidden state.
 </p>
 
 <h3>3. Speculation</h3>
