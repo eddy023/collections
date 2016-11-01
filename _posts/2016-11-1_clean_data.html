@@ -1,0 +1,85 @@
+---
+layout: default
+title: Prepare Date before Trainning (Chatbot with seq2seq model)
+---
+<h3>Code</h3>
+<textarea style="color:green" rows="508" cols="80">
+import re
+num = 0
+
+def paragraphSplit(pg, symbl):
+    i = 0
+    s = []
+    for j,e in enumerate(pg):
+        if (e in symbl or j == len(pg) - 1):
+            if (i == j and j != len(pg) - 1):
+                i += 1
+                continue
+            s.append(pg[i:j+1])
+            i = j+1
+    return s
+
+#def addSpace(s):
+#    ret = ''
+#    slen = len(s)
+#    for i,e in enumerate(s):
+#        if i != slen - 1:
+#            e += ' '
+#        ret += e
+#    return ret
+
+def addSpace(s):
+    ret = ''
+    slen = len(s)
+    for i,e in enumerate(s):
+        if (i != slen - 1 and i != ' '):
+            if (not re.match("[0-9a-zA-Z]", e)):
+                e += ' '
+            else:
+                if (not re.match("[0-9a-zA-Z]", s[i+1])):
+                  e += ' '
+        ret += e
+    return ret
+
+with open("records2.txt","r") as r:
+    with open("input.txt", "w") as in_data:
+        with open("output.txt", "w") as out_data:
+            cl = ''
+            while(True):
+                if (num % 1000 == 0):
+                    print("proc %s sentences" % num)
+                #if (num >= 10):
+                #    break
+                num += 1
+                l = r.readline()
+                if (l == ''):
+                    break
+                # readline()到碰到（"** a post end mark"）为止，每读一句都和前一句合并为一句
+                s = []
+                if (re.match('\*\*a post end mark', l)):
+                    # 按句号分开句子
+                    s = paragraphSplit(cl, ['。', '！', '？'])
+                    cl = ''
+                    # 前一句为input,后一句为output
+                    slen = len(s)
+                    for i,e in enumerate(s):
+                        # 每个句子在字之间加空格
+                        e = addSpace(e)
+                        e += '\n'
+                        #print(e)
+                        if (i != slen-1):
+                            in_data.write(e)
+                        if (i != 0):
+                            out_data.write(e)
+                else:
+                    # 去掉首尾空格
+                    l = l.strip()
+                    # 其它空格变为逗号
+                    l = re.sub("^[\f\n\r\t\v]+", "，", l)
+                    # 去掉特殊符号
+                    # 段末尾加句号
+                    if (len(l) >= 1):
+                        if (l[-1] not in ['。', '！', '?']):
+                            l = l + '。'
+                    cl = cl + l       
+</textarea>
