@@ -6,11 +6,11 @@ title: Logistical Regression
 <h2>{{ page.title }}</h2>
 <p>--BACKGROUND--</p>
 <p>Unlike linear regression which predicts value in a continous space, logistical regression learns to classify data into two groups. 
-  To do this, the linear function of parameters and collected data are substituted into a logistical or sigmoid function which "squashes"
-  y's domain from (-inf,inf) to (0,1). In this case, we can interpret y in (0,1) as a probability to construct a cost functoin. Actually,
-  for a lot of machine learning models, the idea is firstly to firstly express a "prediction" data in the form of probabilities (i.e., 
-  combination of all possible outcomes with corresspoinding probability). Then the distance between the "preduction" data and the collected
-  data (called label) is deemed as model cost, minizing of which will tune the parameters of the model to improve the prediction accuracy.
+  To do this, the linear function of parameters \(\theta\) and collected data \(x\) are substituted into a logistical or sigmoid function
+  which "squashes" the value domain of \(y\)from (-inf,inf) to (0,1). In this case, we can interpret y in (0,1) as a probability to 
+  construct a cost functoin. For many machine learning models, the idea is to firstly express a "prediction" data \(y^~\) in the form of 
+  probabilities (i.e., combination of all possible outcomes with corresspoinding probability). Then the distance between \(y^~\) and
+  \(y\) (called label) is deemed as model cost, minizing of which is to tune the parameters of the model to improve the prediction accuracy.
   Note that the logistical function is derivative in (-inf, inf) and we can apply gradient descent to find the solution. </p>
 <p>--MODEL--</p>
 <p><m>$$ y = \frac{1}{1+e^{\theta^T X}} $$</m></p>
