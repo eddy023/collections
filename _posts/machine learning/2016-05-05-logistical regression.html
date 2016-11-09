@@ -23,9 +23,7 @@ g'(z) & = \frac{d}{dz} \frac{1}{1+e^{-z}} \\
       & = g(z)(1-g(z))
 \end{align}
 $$
-<p>The above model assumes y is a linear combination of x. If the model fail to fit the data well, you may consider introduce higher order variable(s) which might be like:</p>
-<p>$$ y = \sum_{i=0}^n \theta_i \times x_i + \theta_i' \times x_i^2 + ... $$</p>
-<p>In later posts, we'll discuss how to do model selection.</p>
+
 <p>--COST FUNCTION--</p>
 <p>$$J(\theta) = 1/2 \times \sum_{j=0}^m (\sum_{i=0}^n \theta_i \times x_i^{(j)} - y_j)^2 $$</p>
 <p>The cost function measures how y is fit into x. Minimizing the cost we would learn an optimal parameter value (set). The minimizing process is to solve a convex optimization problem for quadratic function. We can use gradient descent or Newton's method to solve it. We apply gradient descent here and we need to run below formula iteratively until convergence.</p>
