@@ -5,10 +5,17 @@ title: Logistical Regression
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <h2>{{ page.title }}</h2>
 <p>--BACKGROUND--</p>
-<p>Linear regression is used to learn a model to classify data into two groups. Actually, we apply a logistical or sigmoid function on the simple model of linear regression, which "squashes" y's domain from (-inf,inf) to (0,1). This came out of two reason: 1) we can interpret y in (0,1) as a probability to construct a cost functoin; 2) the logistical function is derivative in (-inf, inf). Actually, there is another important and more formal reason why apply logistical function we will discuss in a later post.</p>
+<p>Unlike linear regression which predicts value in a continous space, logistical regression learns to classify data into two groups. 
+  To do this, the linear function of parameters and collected data are substituted into a logistical or sigmoid function which "squashes"
+  y's domain from (-inf,inf) to (0,1). In this case, we can interpret y in (0,1) as a probability to construct a cost functoin. Actually,
+  for a lot of machine learning models, the idea is firstly to firstly express a "prediction" data in the form of probabilities (i.e., 
+  combination of all possible outcomes with corresspoinding probability). Then the distance between the "preduction" data and the collected
+  data (called label) is deemed as model cost, minizing of which will tune the parameters of the model to improve the prediction accuracy.
+  Note that the logistical function is derivative in (-inf, inf) and we can apply gradient descent to find the solution. </p>
 <p>--MODEL--</p>
-<p><m>$$ y = \sum_{i=0}^n \theta_i \times x_i $$</m></p>
-<p>The above model (hypothesis) assumes y is a linear combination of x. If the model fail to fit the data well, you may consider introduce higher order variable(s) which might be like:</p>
+<p><m>$$ y = \frac{1}{1+e^{\theta^T X}} $$</m></p>
+
+<p>The above model assumes y is a linear combination of x. If the model fail to fit the data well, you may consider introduce higher order variable(s) which might be like:</p>
 <p>$$ y = \sum_{i=0}^n \theta_i \times x_i + \theta_i' \times x_i^2 + ... $$</p>
 <p>In later posts, we'll discuss how to do model selection.</p>
 <p>--COST FUNCTION--</p>
