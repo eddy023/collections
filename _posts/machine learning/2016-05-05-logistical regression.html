@@ -13,8 +13,16 @@ title: Logistical Regression
   \(y\) (called label) is deemed as model cost, minizing of which is to tune the parameters of the model to improve the prediction accuracy.
   Note that the logistical function is derivative in (-inf, inf) and we can apply gradient descent to find the solution. </p>
 <p>--MODEL--</p>
-<p><m>$$ y = \frac{1}{1+e^{\theta^T X}} $$</m></p>
-
+<p><m>$$ y = h(\theta) = \frac{1}{1+e^{-\theta^T X}} $$</m></p>
+<p>For logistical function, its derivative has a property:</p>
+$$
+\begin{align}
+g'(z) & = \frac{d}{dz} \frac{1}{1+e^{-z}}
+      & = (\frac{1}{1+e^{-z}})^2 e^{-z}
+      & = \frac{1}{1+e^{-z}} (1 - \frac{1}{1+e^{-z}})
+      & = g(z)(1-g(z))
+\end{align}
+$$
 <p>The above model assumes y is a linear combination of x. If the model fail to fit the data well, you may consider introduce higher order variable(s) which might be like:</p>
 <p>$$ y = \sum_{i=0}^n \theta_i \times x_i + \theta_i' \times x_i^2 + ... $$</p>
 <p>In later posts, we'll discuss how to do model selection.</p>
