@@ -16,10 +16,10 @@ title: A Quick Look into Machine Learning Algorithms
 <p>$$ y = h(\sum_{i=0}^n \theta_i \times x_i) $$</p>
 <p>\(x\) and \(y\) are the input and output data of the model; \(h\) represents "hypothesis" and is partially represented by \(theta\) 
   which are unknown parameters to learn. Commonly, the learning process is to firstly calcuate a "prediction output" \(y^~\) based on 
-  a set of randomly initialized parameters and pre-collected \(x\). Then, the "distance" between \(y^~\) and \(y\) (e.g., euclidean 
-  distance) will be used as a cost, minimizing which will tune the parameters to improve the predict accuracy. Repeat these steps utill
-  the cost meets predefined threshold. If \(y\) is not provided during the learning process, the algorithm would work differently and is called unsupervised learning. We 
-  will discuss these algorithms after finishing supervised algorithms.</p>
+  a set of randomly initialized parameters and pre-collected \(x\). Then, use the "distance" between \(y^~\) and \(y\) (e.g., euclidean 
+  distance) as a cost and run gradient descent to minimize it. This will tune the parameters to improve the prediction accuracy. Repeat
+  these steps utill the cost meets predefined threshold. If \(y\) is not provided during the learning process, the algorithm would work
+  differently and is called unsupervised learning. We will discuss these algorithms after finishing supervised algorithms.</p>
 <p style="text-align:center"><img src="/collections/imgs/1-shinkansen-cn.png" style="width:400px;height:300px;" /><img src="/collections/imgs/1-shinkansen-jp.png" style="width:400px;height:300px;" /></p>
 <p style="text-align:center; font-style:italic">Fig. 1-2 Two different shapes of bullet trains</p>
 <p style="text-align:center"><img src="/collections/imgs/1-robot-walk.png" style="width:400px;height:300px;" /><img src="/collections/imgs/1-quadriplane-fly.png" style="width:400px;height:300px;" /></p>
@@ -28,7 +28,7 @@ title: A Quick Look into Machine Learning Algorithms
 <p style="font-size:24px; font-weight:bold">II. Regession</p>
 <br />
 <p style="font-size:18px; font-style:italic">1. Linear Regression</p>
-<p>Linear regression is oftenly used to trian a "mapping" to predict the value of a CONTINUOUS variable (e.g., temperature, housing price, visitors, etc). Given a set of data with some inherent linear structure, we try fitting a line into the "sparse data". The data look likes "regressing" into a line which could be straight, curve, or more complicated shape, depends on the model choosed. The gist is to seek balance between under-fitting and over-fitting of data. </p>
+<p>Linear regression is trained to predict outcomes in continous space (e.g., temperature, housing price, visitors, etc). Given a set of data with some inherent linear structure, we try fitting a line into the "sparse data". The data look likes "regressing" into a line which could be straight, curve, or more complicated shape, depends on the model choosed. The gist is to seek balance between under-fitting and over-fitting of data. </p>
 <p style="text-align:center"><img src="/collections/imgs/2-linear-regression.png" style="width:400px;height:300px;" /><img src="/collections/imgs/2-linear-regression2.png" style="width:400px;height:300px;" /></p>
 <p style="text-align:center; font-style:italic; font-weight:bold">Fig. 2-1 Two examples of linear regression</p>
 <p>In Fig. 2-1, the first sub-figure simply follows the model:</p>
