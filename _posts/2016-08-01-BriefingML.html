@@ -12,20 +12,14 @@ title: A Quick Look into Machine Learning Algorithms
 <p style="text-align:center"><img src="/collections/imgs/1-ml-model.png" alt="basic ml model" style="width:400px;height:300px;" /></p>
 <p style="text-align:center; font-style:italic">Fig. 1-1 A basic model of machine learning algorithm</p>
 
-<p>The above figure depicts the basic model of machine learning and can be interpreted using a simple math formula:</p>
+<p>The above figure depicts the basic model of machine learning algorithms and in math can be interpreted as:</p>
 <p>$$ y = h(\sum_{i=0}^n \theta_i \times x_i) $$</p>
-<p>\(x\) and \(y\) are the input and output data of the model, collected beforehand or to be prected; 
-\(h\) represents "hypothesis" and is partially embodied by \(theta\) which are the parameters to learn. 
-For any known machine learning problem, people follow this basic model no matter how complicated their specific algorithm is.</p>
-<p>The essence of this models lies in two aspects: 1) using given set of \(x\) and \(y\) to discover a coherent relation or 
-mapping between the input and the output, which is the learning process on \(theta\); 2) using learnt \(theta\) and newly input \(x\)
-to predict \(y\).</p>
-<p> If during the learning process, \(y\) is not provided, the algorithm proposed for such problem is called unsupervised learning
-, or supervised learning otherwise. Notably, another type of learning algorithm called reinforcement learning gains increasingly 
-more attention of the public. Basically, "Reinforcement learning differs from standard supervised learning in that correct input/output 
-pairs are never presented, nor sub-optimal actions explicitly corrected.", as I quote from wikipedia.</p>
-
-<p>We will discuss several supervised and unpervised learning algorithms in this post, but temporarily not dig into reinforcement learning (RL), thus insteand we present a few RL applications below to gain some quick intuitives.</p>
+<p>\(x\) and \(y\) are the input and output data of the model; \(h\) represents "hypothesis" and is partially represented by \(theta\) 
+  which are unknown parameters to learn. Commonly, the learning process is to firstly calcuate a "prediction output" \(y^~\) based on 
+  a set of randomly initialized parameters and pre-collected \(x\). Then, the "distance" between \(y^~\) and \(y\) (e.g., euclidean 
+  distance) will be used as a cost, minimizing which will tune the parameters to improve the predict accuracy. Repeat these steps utill
+  the cost meets predefined threshold. If \(y\) is not provided during the learning process, the algorithm would work differently and is called unsupervised learning. We 
+  will discuss these algorithms after finishing supervised algorithms.</p>
 <p style="text-align:center"><img src="/collections/imgs/1-shinkansen-cn.png" style="width:400px;height:300px;" /><img src="/collections/imgs/1-shinkansen-jp.png" style="width:400px;height:300px;" /></p>
 <p style="text-align:center; font-style:italic">Fig. 1-2 Two different shapes of bullet trains</p>
 <p style="text-align:center"><img src="/collections/imgs/1-robot-walk.png" style="width:400px;height:300px;" /><img src="/collections/imgs/1-quadriplane-fly.png" style="width:400px;height:300px;" /></p>
