@@ -14,7 +14,7 @@ title: A Quick Look into Machine Learning Algorithms
 
 <p>The above figure depicts the basic model of machine learning algorithms and in math can be interpreted as:</p>
 <p>$$ y = h(\sum_{i=0}^n \theta_i \times x_i) $$</p>
-<p>\(x\) and \(y\) are the input and output data of the model; \(h\) represents "hypothesis" and is partially represented by \(theta\) 
+<p>\(x\) and \(y\) are the input and output data of the model; \(h\) represents "hypothesis" and is partially represented by \(\theta\) 
   which are unknown parameters to learn. The learning process is to firstly calcuate a "prediction output" \(y^~\) based on 
   a set of randomly initialized parameters and pre-collected \(x\). Then, use the "distance" between \(y^~\) and \(y\) (e.g., euclidean 
   distance) as a cost and run gradient descent to minimize it. Repeat these steps will tune the parameters to improve the prediction 
