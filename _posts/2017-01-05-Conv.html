@@ -15,6 +15,7 @@ align two series by this time instant and evaluate), and "auto-correlation" eval
 (depend on the form of "time-line"), e.g., if a series is in the form of matrix, like an image, the time-line will be in 
   discrete 2d-format indicating the row-number and column number respectively.</p>
 <p>More on covolution: 
-<br>$$ conv(n,m) = \sum_{k=-\infty}^{\infty} \sum_{l=-\infty}^{\infty} f(k, l) * h(n-k, m-l) $$
-  
+<br>$$ conv(n,m) = \sum_{k=-\infty}^{\infty} \sum_{l=-\infty}^{\infty} f(k, l) h(n-k, m-l) $$
+  The calculation is centered on \(n, m\) to mutiply \(f\) and \(h\) in a "reverse pair" order. In this way, by elaborating on
+  the value or structure of \(f\), it can flexibly combine values around \(n, m\) of \(h\) to achieve "filtering" purpose. 
 </p>
