@@ -1,0 +1,14 @@
+---
+layout: default
+title: Convolution, Cross-correlation and Auto-correlation
+---
+<h2>{{ page.title }}</h2>
+<p style="text-align:center"><img src="/collections/imgs/conv-compare.png" alt="Convolution, Cross-correlation and Auto-correlation" style="width:400px;height:300px;" /></p>
+<p style="text-align:center; font-style:italic">Fig. 1-1 Convolution, Cross-correlation and Auto-correlation</p>
+<p>As can be seen, all three operations perform calculations sliding along the "time line". At a particular time instant, it 
+generally performs multiple and integration operation to obtain the result for this moment. "Convolution" obtains filtering 
+result for this moment, "cross-correlation" evaluates "similarity" between two different series for this moment (intuitively, 
+align two series by this time instant and evaluate), "auto-correlation" evaluates "similarity" of a series on its own by 
+"aligning" its own value according to this moment. Sliding over the time line, we obtain continueous or discrete results 
+(depend on the form of "time-line"). If a series is expressed in matrix, like image, the time-line is in 2d-format, indicating
+the row-number and column number respectively.</p>
