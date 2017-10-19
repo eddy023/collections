@@ -28,10 +28,10 @@ an homogenous vector; A 4-vector representing points in \(R^3\) is an homogenous
 <p>[Ref] Homogeous vector actually represetns a point. A vector has no concept on position but a point does. 
    </br> A vector, note that \([X, Y, Z, o]\) is a matrix:
     $$ v = [v_1, v_2, v_3]^T = v_1X + v_2Y + v_3Z $$
-    $$ v = [X, Y, Z, o] \time [v_1, v_2, v_3, 0]^T $$
+    $$ v = [X, Y, Z, o] \times [v_1, v_2, v_3, 0]^T $$
    </br> A point:
     $$ p - o = [p_1, p_2, p_3] = p_1X + p_2Y + p_3Z $$
-    $$ p = [X, Y, Z, o] \time [p_1, p_2, p-3, 1]^T $$
+    $$ p = [X, Y, Z, o] \times [p_1, p_2, p-3, 1]^T $$
   </br> We can see that the homogenous coordinate for point can represent translation and this the reason why it is used to dealing with
   computer vision algirthms.
 </p>
