@@ -8,18 +8,18 @@ title: Notes of Multiple View of Geometry in Computer Vision
 
 <h3>Chapter 2: Projective Geometry and Transformations of 2D</h3>
 <p>Content: homogenous notation, planar geometry, projective transformation</p>
-<h4>section 1</h4>
-<p>terms: planar (2d), collinearity (a straight line is imaged as a straight line)</p>
-<p>planr geometry: geometric viewpoint vs. algebraic viewpoint (coordinates with certen basis) , algebraic approach is helpful for deriving
+<h4>Section 1</h4>
+<p>Terms: planar (2d), collinearity (a straight line is imaged as a straight line)</p>
+<p>Planr geometry: geometric viewpoint vs. algebraic viewpoint (coordinates with certen basis) , algebraic approach is helpful for deriving
 algorithms and practical computation methods.</p>
-<p>geometric method (e.g., euclid) vs algebraic method (e.g., introduce Descartes coordinates; a conic section is represented by 
+<p>Geometric method (e.g., euclid) vs algebraic method (e.g., introduce Descartes coordinates; a conic section is represented by 
   a symmetric matrix). In mathematics, a conic section (or simply conic) is a curve obtained as the intersection of the surface 
   of a cone with a plane. The three types of conic section are the hyperbola, the parabola, and the ellipse.  A significant advantage
   of the algebraic approach to geometry is that results derived in this way may more easily be used to derive algo- rithms and 
   practical computational methods. Computation and algorithms are a major concern in this book, which justifies the use of the 
   algebraic method.</p>
-<p>computation: Geometric entities will by default be represented by column vectors.</p>
-<p>homogenous: origins from the equivalent class of vector \((a,b,c)^T\) that represent the same line. The set of equivalence classes 
+<p>Computation: Geometric entities will by default be represented by column vectors.</p>
+<p>Homogenous: origins from the equivalent class of vector \((a,b,c)^T\) that represent the same line. The set of equivalence classes 
   of vectors in \(R^3\) − \((0, 0, 0)^T\) forms the projective space \(P^2\). The notation \((0, 0, 0)^T\) indicates that the vector 
   \((0, 0, 0)^T\), which does not correspond to any line, is excluded.</p>
 <p>[G] If vector V and kV is equivalent in an given circumstance (k is any none zeor scalar), we say V is in homogenous representation
@@ -36,9 +36,9 @@ an homogenous vector; A 4-vector representing points in \(R^3\) is an homogenous
   computer vision algirthms.
 </p> 
 <p>Intersection of lines: \(x = l \times l' \)</p>
-<p>line joining points: \(l = x \times x' \)</p>
-<p>cross product: calcuating intersection of lines or line joing points, the coordinates involved in the cross product are all 
+<p>Line joining points: \(l = x \times x' \)</p>
+<p>Cross product: calcuating intersection of lines or line joing points, the coordinates involved in the cross product are all 
   homogenous.</p>
-<p>ideal points and lines at infinite: points in \(R^2\) plus ideal points construct the projective space \(P^2\).
+<p>Ideal points and lines at infinite: points in \(R^2\) plus ideal points construct the projective space \(P^2\).
   $$ (1, 0, 0)\dot(x_1, x_2, 0) = 0 $$
-</p>
+</p> Degenerate conic </p>
