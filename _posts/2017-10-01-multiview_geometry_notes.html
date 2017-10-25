@@ -46,9 +46,17 @@ an homogenous vector; A 4-vector representing points in \(R^3\) is an homogenous
 <p> Conic formual in 2d (X, Y) nomal coordinate:
   $$ aX^2 + bXY + CY^2 + dX + eY + f = 0 $$
   </br> convert into homogenous coordinate (X, Y, Z):
-  $$ aX^2 + bXY + CY^2 + dXZ + eYZ + fZ = 0 $$
+  $$ aX^2 + bXY + CY^2 + dXZ + eYZ + fZ^2 = 0 $$
   </br> It can be again described in matrix form:
   $$ p^TCp = 0 $$
+  </br> \(p\) is \([X,Y,Z]^T\) and \(C\) is 
+  $$
+  \begin{matrix}
+	a & b/2 & d/2 \\
+	b/2 & c & 2/2 \\
+	d/2 & e/2 & f \\
+  \end{matrix}
+  $$
 </p>
 <p> Degenerate conic </p>
-<p> A line trangent to a conic: </p>
+<p> A line trangent to a conic at point \(p\): \(Cp\)</p>
