@@ -42,6 +42,11 @@ an homogenous vector; A 4-vector representing points in \(R^3\) is an homogenous
 <p>Ideal points and lines at infinite: points in \(R^2\) plus ideal points construct the projective space \(P^2\).
   $$ (1, 0, 0)\dot(x_1, x_2, 0) = 0 $$
 </p>
+<p>Duality Principle: To any theorem of 2-dimensional projective geometry there corresponds a dual theorem, 
+	which may be derived by interchanging the roles of points and lines in the original theorem.
+</br>we can understand the dulity from the perspective of inner product which shows l \((a, b, c)\) and 
+	p \([x, y, z]^T\) are orthgonal.
+</p>
 <p> Degenerate conic </p>
 <p> Conic formual in 2d (X, Y) nomal coordinate:
   $$ aX^2 + bXY + CY^2 + dX + eY + f = 0 $$
@@ -49,14 +54,14 @@ an homogenous vector; A 4-vector representing points in \(R^3\) is an homogenous
   $$ aX^2 + bXY + CY^2 + dXZ + eYZ + fZ^2 = 0 $$
   </br> It can be again described in matrix form:
   $$ p^TCp = 0 $$
-  </br> \(p\) is \([X,Y,Z]^T\) and \(C\) is 
-  $$
+  </br> \(p\) is \([X,Y,Z]^T\) and \(C\) is matrix shown below.
+  $$ C = 
   \begin{pmatrix}
 	a & b/2 & d/2 \\
-	b/2 & c & 2/2 \\
+	b/2 & c & e/2 \\
 	d/2 & e/2 & f \\
   \end{pmatrix}
   $$
 </p>
 <p> Degenerate conic </p>
-<p> A line trangent to a conic at point \(p\): \(Cp\)</p>
+<p> A line trangent to a conic at point \(p\): \( l = Cp \)</p>
