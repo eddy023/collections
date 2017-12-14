@@ -3,9 +3,15 @@ layout: default
 title: LinkNet
 ---
 <h2>{{ page.title }}</h2>
+<p>
 {dl puts attention on build a structure to reflect the ideal "flow channel" or "reasoning procedure" between training input and output.
 Algorithms like forward-backward make effort to approach this hypothesis (of strcuture) as possible as it could. Policies to improve
 dl so lies on proper design of the structure which can better or more really reflect the intinsic relation of trainning data. Improve
 learning effciency depends on the structure design as well, e.g., bypassing policy in LinkNet.}
-
+</p>
+<p>Goal: semantic segmentation</p>
+<p>Idea: inspired by the ender-decoder structure of auto-encoder. More, bypassing spatial information, directly from the encoder to 
+  the corresponding decoder improves accuracy along with significant decrease in processing time. </p>
+<p>Structure: </p>
+<p>[conv, full convolution, <a href = "https://arxiv.org/pdf/1512.03385.pdf">resuidual block</a>]</p>
 
