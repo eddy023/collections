@@ -169,11 +169,44 @@ td {
     <tr>
       <td class = "paperTitle"><a href="https://arxiv.org/pdf/1409.1556.pdf">
                    Very deep convolutional networks for large-scale image recognition</a></td>
-      <td></td>
+      <td>2015</td>
       <td></td>
       <td></td>
       <td>
-          <p>Goal: </p>
+          <p>Goal: evaluation image recognition accuracy along network depth varys</p>
+          <p>Gap:</p>
+          <p>Method:smaller receptive field; smaller stride size; test stacked conv layers with increasing layer number;
+          pre-training on network weight initialization (or alternative method stated in "Understanding the difficulty of 
+              training deep feedforward neural networks"); </p>
+          <p>{adjust receptive field size, stride size; train with multi-scale of origin image; deeper network can apply smaller size of
+              receptive field (e.g., a 9x9 layer can in certain level be viewed as 3 stacked 3x3 conv layers)}</p>
+          <p>[argue that local response normalization is in-effective]</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td class = "paperTitle"><a href="https://www.nvidia.cn/content/tesla/pdf/machine-learning/imagenet-classification-with-deep-convolutional-nn.pdf">
+                   ImageNet classification with deep convolutional neural networks</a></td>
+      <td>2012</td>
+      <td></td>
+      <td>ReLu, local-response normalization, fully-convolutional network</td>
+      <td>
+          <p>Goal:</p>
+          <p>Gap:</p>
+          <p>Method:</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td class = "paperTitle"><a href="http://www-prima.imag.fr/jlc/Courses/2016/PRML/XavierInitialisation.pdf">
+                   Understanding the difficulty of training deep feedforward neural networks</a></td>
+      <td>2010</td>
+      <td></td>
+      <td>weight initialization</td>
+      <td>
+          <p>Goal:</p>
+          <p>Gap:</p>
+          <p>Method:</p>
       </td>
     </tr>
 
