@@ -1,0 +1,12 @@
+---
+layout: default
+title: CMakeList
+---
+<h2>{{ page.title }}</h2>
+
+<p>FIND_PACKAGE(Eigen3 REQUIRED): find package pre-installed, generate variable in the form ${Eigen3_LIBS}</p>
+<p>INCLUDE_DIRECTORIES: directories of header files (the searching range for header files), those header files included in the compiling
+source files should be under these directories</p>
+<p>LINK_DIRECTORIES: directories of libs (the searching range for lib files)</p>
+<p>ADD_EXECUTABLE: generate the target obj or exec file</p>
+<p>TARGET_LINK_LIBRARIES: link libs found in "package" or "link_directories" to the target obj</p>
