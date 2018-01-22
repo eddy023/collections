@@ -17,6 +17,49 @@ Method:
 </p>
 
 <h3>Deep Compression - Compressing Deep Nerual Networks with Pruning, Trained Quantization and Huffman Codeing</h3>
+<p>Author:Song Han， Huizi Mao, William J. Dally</p>
+<p>Year:2016</p>
+<p>
+Goal: save memory to fit mobile device, accelerate computation speed
+</br>
+Gap: enormous parameters for dl models
+</br>
+Method: 3-stage strategy: prunning less-important weights, quatization weights and encode weigths with Huffman coding
+</br>
+Notes:
+</br>
+["Learning both weights and connections for efficient neural networks", 2015 work prune weights without accuracy loss] 
+</br>
+['compressed sparse row/column format']
+</br>
+</p>
+
+<h3>Learning both weights and connections for efficient neural networks</h3>
+<p>Author:</p>
+<p>Year:2015</p>
+<p>
+Goal: save memory to fit mobile device, accelerate computation speed
+</br>
+Gap: enormous parameters for dl models
+</br>
+Method: 3-step approach: train to find weight importance, prune less importance weight and re-train for fine tunning
+</br>
+Notes:
+["Network in network", "Going Deeper with Convolutions", replace fully connected layers with global average pooling and add a liner layer
+to enable tranfer learning.]
+["Comparing biases for minimal network construction with back-propagation", 1989, biased weight decay]
+["Optimal brain damage", 1990, Yann le Cun]
+["Second order derivatives for network pruning: Optimal brain surgeon", 1993, Babak Hassibi]
+</br>
+["Compressingneural networks with the hashing trick", hashnet]
+["Hash kernels for structured data", "Feature hashing for large scale multitask learning", sparsity will minimize hash collision]
+[? FLOP]
+
+</br>
+
+</p>
+
+<h3>Network in network / Going Deep</h3>
 <p>Author:</p>
 <p>Year:</p>
 <p>
